@@ -1,2 +1,2 @@
-# sakanayajapon
+# SAKANAYA JAPON
 SAKANAYA JAPON用のウェブページ
