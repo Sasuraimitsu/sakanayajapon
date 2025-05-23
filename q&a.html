@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Q&A</title>
+  <title>Q&A - Multilingual</title>
   <style>
     body { font-family: sans-serif; margin: 20px; padding: 0; }
-    h1 { text-align: center; }
+    h1 { text-align: center; color: #007BFF; }
     .qa-section { margin-bottom: 30px; }
     .qa-section h2 { color: #007BFF; }
     .qa-item { margin-bottom: 20px; }
@@ -15,19 +15,33 @@
       width: 100%; padding: 10px; margin-bottom: 20px;
       font-size: 16px; box-sizing: border-box;
     }
+    .lang-toggle { text-align: center; margin-bottom: 20px; }
+    .lang-toggle button { margin: 0 10px; padding: 8px 16px; font-size: 14px; }
   </style>
   <script>
-    function searchQA() {
-      let input = document.getElementById('search').value.toLowerCase();
-      let items = document.getElementsByClassName('qa-item');
-      for (let item of items) {
-        let text = item.textContent.toLowerCase();
-        item.style.display = text.includes(input) ? '' : 'none';
-      }
+    function switchLang(lang) {
+      document.getElementById('qa-ja').style.display = lang === 'ja' ? '' : 'none';
+      document.getElementById('qa-en').style.display = lang === 'en' ? '' : 'none';
+    }
+
+    function searchQA(lang) {
+      const input = document.getElementById('search-' + lang).value.toLowerCase();
+      const items = document.querySelectorAll('#qa-' + lang + ' .qa-item');
+      items.forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
     }
   </script>
 </head>
 <body>
+
+<div class="lang-toggle">
+  <button onclick="switchLang('ja')">日本語</button>
+  <button onclick="switchLang('en')">English</button>
+</div>
+
+<div id="qa-ja">
+  <body>
   <h1>よくある質問</h1>
   <input type="text" id="search" onkeyup="searchQA()" placeholder="質問を検索...">
 
@@ -77,5 +91,60 @@
     電話：016-881-370<br>
     営業時間：Monday-Saturday from 11:30 am to 18:30 pm.(Without national holiday)</p>
   </div>
+</body>
+</div>
+
+<div id="qa-en" style="display:none;">
+  <h1>Frequently Asked Questions</h1>
+  <input type="text" id="search-en" onkeyup="searchQA('en')" placeholder="Search questions...">
+
+  <div class="qa-section">
+    <h2>Ordering</h2>
+    <div class="qa-item"><strong>Q: How can I order?</strong>A: You can order through our <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" target="_blank">LINE online order system</a>.</div>
+    <div class="qa-item"><strong>Q: Can I order from Facebook?</strong>A: Product info is on Facebook, but please place orders via LINE. → <a href="https://www.facebook.com/fishstorejapan?mibextid=ZbWKwL" target="_blank">Facebook page</a></div>
+    <div class="qa-item"><strong>Q: I have allergies. What should I do?</strong>A: You can specify allergies in the LINE order system. Please be sure to fill this out.</div>
+    <div class="qa-item"><strong>Q: Can I choose specific fish in the omakase sashimi?</strong>A: Except for allergies, we cannot accept specific requests. We will prepare with the recommended fish of the day.</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Deadline & Delivery</h2>
+    <div class="qa-item"><strong>Q: Is there an order deadline?</strong>A: Orders must be placed by 4:30 PM, at least 2 hours before your desired time.</div>
+    <div class="qa-item"><strong>Q: Can I order same-day?</strong>A: Yes, same-day orders are accepted.</div>
+    <div class="qa-item"><strong>Q: When will I receive the product?</strong>A: Please check the ready time in the LINE order system during checkout.</div>
+    <div class="qa-item"><strong>Q: What is the delivery area?</strong>A: We deliver throughout Phnom Penh.</div>
+    <div class="qa-item"><strong>Q: How is the product delivered?</strong>A: Delivery is made via GRAB EXPRESS.</div>
+    <div class="qa-item"><strong>Q: How much is the delivery fee?</strong>A: Delivery starts from Central Market. Delivery fees are borne by the customer.</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Payment</h2>
+    <div class="qa-item"><strong>Q: What are the payment methods?</strong>A: Payment is made by QR code.</div>
+    <div class="qa-item"><strong>Q: What if the product condition is poor?</strong>A: Please contact us immediately upon receipt. We will confirm the situation and respond accordingly.</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Cancellation & Storage</h2>
+    <div class="qa-item"><strong>Q: Can I cancel after ordering?</strong>A: You may cancel up to 2 hours before your requested delivery time.</div>
+    <div class="qa-item"><strong>Q: How should I store the product?</strong>A: Storage varies by product. Most refrigerated items should be stored at 4°C or below and eaten the same day.</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Others</h2>
+    <div class="qa-item"><strong>Q: Do you have a store?</strong>A: Currently, we only offer online sales.</div>
+    <div class="qa-item"><strong>Q: Do you restock daily?</strong>A: Yes, we regularly receive shipments from Japan and Cambodia ports.</div>
+    <div class="qa-item"><strong>Q: Can you clean the fish?</strong>A: Yes, we can prepare fish for sashimi, grilling, etc., based on your needs. Please let us know when ordering.</div>
+    <div class="qa-item"><strong>Q: Do you accept large restaurant orders?</strong>A: Yes, we do. Please contact us for more information.</div>
+    <div class="qa-item"><strong>Q: Where can I contact you for questions?</strong>A: Please use our <a href="https://lin.ee/4S6m5Ye" target="_blank">LINE chat</a> or <a href="https://www.facebook.com/fishstorejapan?mibextid=ZbWKwL" target="_blank">Facebook message</a>.</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Store Information</h2>
+    <p><strong>Name:</strong> SAKANAYA JAPON<br>
+    <strong>Address:</strong> #72BE0, Street 174, Phnom Penh<br>
+    <strong>Phone:</strong> 016-881-370<br>
+    <strong>Hours:</strong> Monday–Saturday, 11:30 AM to 6:30 PM (except national holidays)</p>
+  </div>
+</div>
+
 </body>
 </html>
