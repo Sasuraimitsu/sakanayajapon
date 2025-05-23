@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABOUT US</title>
+  <title>ABOUT US - Multilingual</title>
   <style>
     body { font-family: sans-serif; line-height: 1.8; margin: 20px; color: #333; }
     h1, h2 { color: #007BFF; }
@@ -11,9 +11,24 @@
     p, ul { margin-bottom: 1em; }
     strong { font-weight: bold; }
     ul { padding-left: 20px; }
+    .lang-toggle { text-align: center; margin-bottom: 20px; }
+    .lang-toggle button { margin: 0 10px; padding: 8px 16px; font-size: 14px; }
   </style>
+  <script>
+    function switchLang(lang) {
+      document.getElementById('content-ja').style.display = lang === 'ja' ? '' : 'none';
+      document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
+    }
+  </script>
 </head>
 <body>
+  <div class="lang-toggle">
+    <button onclick="switchLang('ja')">日本語</button>
+    <button onclick="switchLang('en')">English</button>
+  </div>
+
+  <div id="content-ja">
+    <body>
   <h1>🐟 私たちの想い — 「海のある日常を、カンボジアに。」</h1>
   <p>日本では、魚は食卓の中心にある存在でした。お母さんが朝早く市場で選んだ魚、家族みんなで囲む夕食の刺身、週末の手巻き寿司パーティー。そんなふうに、「魚」はただの食材ではなく、家族や友人と過ごす温かい時間の象徴でした。</p>
   <p>でも、カンボジアに来てから、そんな「当たり前」が簡単ではなくなりました。</p>
@@ -64,5 +79,39 @@
     <li>お子様が楽しめるお魚教室の開催</li>
     <li>地域の方との交流や食文化の普及活動</li>
   </ul>
+</body>
+  </div>
+
+  <div id="content-en" style="display: none;">
+    <h1>🐟 Our Vision — “A Life with Seafood in Cambodia”</h1>
+    <p>In Japan, fish is a familiar presence at every meal. From early-morning market runs to family dinners with sashimi and weekend sushi parties, seafood is more than food—it’s a way to share warmth and connection.</p>
+    <p>In Cambodia, where river fish are more common and sea fish are rare, that familiarity is harder to find. Many people feel a longing for the sea.</p>
+    <p>We started this shop to fulfill that wish—to make sashimi possible at home, to bring Japanese flavors to your children, and to help you enjoy hand-roll sushi with friends.</p>
+    <p>By working with local fishermen and importing fresh seafood from Japan, we bring quality that rivals Japan itself. We also prepare sashimi, sushi sets, and easy-prep dishes for busy families.</p>
+    <p><strong>We want to bring “a life with seafood” back to Cambodia, and help your table shine with joy.</strong></p>
+
+    <h2>🧊 Services</h2>
+    <p><strong>Fresh Fish (whole or processed)</strong><br>We clean or prepare fish for sashimi as needed.</p>
+    <p><strong>Omakase Sets</strong><br>・Sashimi Platter<br>・Hand-Roll Sushi Set</p>
+    <p><strong>Easy-prep Side Dishes</strong><br>Ready-to-eat items that can be thawed or warmed at home.</p>
+    <p><strong>Online Ordering</strong><br>Order easily via LINE.</p>
+    <p><strong>Enjoyable Food Experience</strong><br>We develop products that families and friends can enjoy together at home.</p>
+
+    <h2>Company Info</h2>
+    <ul>
+      <li><strong>Name:</strong> SAKANAYA JAPON</li>
+      <li><strong>Address:</strong> #72BE0, Street 174, Phnom Penh</li>
+      <li><strong>Phone:</strong> 016-881-370</li>
+      <li><strong>Hours:</strong> Mon–Sat 11:30am–6:30pm (Closed holidays)</li>
+      <li><strong>Staff:</strong> 9 people</li>
+    </ul>
+
+    <h2>Activities</h2>
+    <ul>
+      <li>Participation in local events</li>
+      <li>Fish workshops for children</li>
+      <li>Community engagement and food culture education</li>
+    </ul>
+  </div>
 </body>
 </html>
