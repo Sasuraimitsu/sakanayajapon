@@ -1,2 +1,2 @@
-# sakanayajapon.github.io
+# sakanayajapon
 SAKANAYA JAPON用のウェブページ
