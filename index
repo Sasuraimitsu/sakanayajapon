@@ -2,10 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sakanaya Japon</title>
   <style>
-    body { font-family: sans-serif; text-align: center; }
-    nav a { margin: 15px; text-decoration: none; font-weight: bold; }
+    body { font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
+    img { max-width: 100%; height: auto; }
+    nav a {
+      display: block; margin: 10px auto; padding: 10px; max-width: 300px;
+      background: #007BFF; color: white; text-decoration: none; border-radius: 5px;
+    }
   </style>
 </head>
 <body>
