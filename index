@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Sakanaya Japon</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    nav a { margin: 15px; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Sakanaya Japon ロゴ" width="200">
+  <nav>
+    <a href="menu.html">MENU</a>
+    <a href="howto.html">HOW TO ORDER</a>
+    <a href="qa.html">Q&A</a>
+    <a href="about.html">ABOUT US</a>
+  </nav>
+</body>
+</html>
