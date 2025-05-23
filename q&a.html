@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q&A</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; padding: 0; }
+    h1 { text-align: center; }
+    .qa-section { margin-bottom: 30px; }
+    .qa-section h2 { color: #007BFF; }
+    .qa-item { margin-bottom: 20px; }
+    .qa-item strong { display: block; margin-bottom: 5px; }
+    input[type="text"] {
+      width: 100%; padding: 10px; margin-bottom: 20px;
+      font-size: 16px; box-sizing: border-box;
+    }
+  </style>
+  <script>
+    function searchQA() {
+      let input = document.getElementById('search').value.toLowerCase();
+      let items = document.getElementsByClassName('qa-item');
+      for (let item of items) {
+        let text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? '' : 'none';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>よくある質問</h1>
+  <input type="text" id="search" onkeyup="searchQA()" placeholder="質問を検索...">
+
+  <div class="qa-section">
+    <h2>注文方法について</h2>
+    <div class="qa-item"><strong>Q: 注文はどこからできますか？</strong>A: <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" target="_blank">LINEのオンライン注文システム</a>からご注文いただけます。</div>
+    <div class="qa-item"><strong>Q: Facebookページからも注文できますか？</strong>A: Facebookでは一部の商品情報をご覧いただけますが、ご注文はLINE注文システムをご利用ください。→ <a href="https://www.facebook.com/fishstorejapan?mibextid=ZbWKwL" target="_blank">Facebookページはこちら</a></div>
+    <div class="qa-item"><strong>Q: アレルギーがあるのですが、どうすればいいですか？</strong>A: LINE注文システムではアレルギーに関する回答を記載いただけます。忘れずに、ご入力お願いします。</div>
+    <div class="qa-item"><strong>Q: おまかせのお刺身は魚の指定はできますか？</strong>A: アレルギー対応以外のお魚の指定は承っておりません。その日のお勧めのお魚にてご用意致します。</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>注文の締切・配送について</h2>
+    <div class="qa-item"><strong>Q: 注文の締切時間はありますか？</strong>A: 16時半が注文の締切時間となっております。ご希望時間の2時間前までにご注文ください。</div>
+    <div class="qa-item"><strong>Q: 当日の注文は可能ですか？</strong>A: はい、可能です。</div>
+    <div class="qa-item"><strong>Q: 商品はいつ届きますか？</strong>A: <strong>LINEのオンライン注文システムにて仕上がり時間をご指定いただけます。</strong>ご注文時にご確認ください。</div>
+    <div class="qa-item"><strong>Q: どのエリアまで配達できますか？</strong>A: プノンペン市内全域に対応しております。</div>
+    <div class="qa-item"><strong>Q: 商品の受け取り方法はどうなりますか？</strong>A: GRAB EXPRESS で配送します。</div>
+    <div class="qa-item"><strong>Q: 配送料はいくらですか？</strong>A: GRAB EXPRESS でセントラルマーケット近くから配送します。配送料はお客様ご負担となります。</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>商品のお支払い等について</h2>
+    <div class="qa-item"><strong>Q: 支払い方法は？</strong>A: QRコード決済となります。</div>
+    <div class="qa-item"><strong>Q: 商品の状態が悪かった場合は？</strong>A: <strong>商品受け取り時にすぐにご連絡ください。</strong>状況確認のうえ、ご連絡いたします。</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>キャンセル・保存方法について</h2>
+    <div class="qa-item"><strong>Q: 注文後のキャンセルはできますか？</strong>A: キャンセルをご希望の場合は配送希望時間2時間前までにご連絡ください。</div>
+    <div class="qa-item"><strong>Q: 商品の保存方法は？</strong>A: 商品ごとに異なりますが、冷蔵商品は基本的には冷蔵保存（4℃以下）で、当日中にお召し上がりください。</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>その他</h2>
+    <div class="qa-item"><strong>Q: 店舗はありますか？</strong>A: 現在はオンライン販売のみとなっております。</div>
+    <div class="qa-item"><strong>Q: 毎日入荷していますか？</strong>A: 日本やカンボジアの漁港から定期的に入荷しています。</div>
+    <div class="qa-item"><strong>Q: 魚をさばいてもらえますか？</strong>A: はい、<strong>刺身用・焼き用など用途に応じて下処理いたします。</strong>注文時にご連絡ください。</div>
+    <div class="qa-item"><strong>Q: レストラン向けの大口注文は可能ですか？</strong>A: はい、<strong>対応可能です。</strong>お気軽にご相談ください。</div>
+    <div class="qa-item"><strong>Q: 質問があるときはどこに連絡すればいいですか？</strong>A: <a href="https://lin.ee/4S6m5Ye" target="_blank">公式LINEのチャット</a>、または<a href="https://www.facebook.com/fishstorejapan?mibextid=ZbWKwL" target="_blank">Facebookメッセージ</a>からご連絡ください。</div>
+  </div>
+
+  <div class="qa-section">
+    <h2>店舗情報</h2>
+    <p>店名：SAKANAYA JAPON<br>
+    住所：#72BE0, Street 174, Phum 11, Sangkat Phar Thmey III, Khan Daun Penh, Phnom Penh.<br>
+    電話：016-881-370<br>
+    営業時間：Monday-Saturday from 11:30 am to 18:30 pm.(Without national holiday)</p>
+  </div>
+</body>
+</html>
