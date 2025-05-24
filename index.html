@@ -4,12 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sakanaya Japon</title>
+  <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pEI6qI7tBSibG1LjFjoFjv5+u6Fnal1XJoWy8g5W6ibc+6qUu8Aj9LjV8E5TCF0p+fW7XcKsdx0hoxYDEb5HcA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <style>
     body { font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
     img { max-width: 100%; height: auto; }
     nav a {
       display: block; margin: 10px auto; padding: 10px; max-width: 300px;
       background: #007BFF; color: white; text-decoration: none; border-radius: 5px;
+    }
+    /* Facebookいいね！用のアイコン点滅 */
+    nav a.facebook-like {
+      display: inline-flex;
+      align-items: center;
+      background: #1877f2;  /* Facebookブルー */
+    }
+    .thumb {
+      margin-left: 0.5em;
+      font-size: 1.2em;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75%     { opacity: 0; }
     }
   </style>
 </head>
@@ -20,6 +43,16 @@
     <a href="howto.html">HOW TO ORDER</a>
     <a href="q&a.html">Q&A</a>
     <a href="aboutus.html">ABOUT US</a>
+    <!-- ここが Facebook いいね！リンク -->
+    <a
+      href="https://www.facebook.com/share/15UgiCCdu4/"
+      class="facebook-like"
+      target="_blank"
+      rel="noopener"
+    >
+      Facebookでいいね！ 
+      <i class="fa-solid fa-thumbs-up thumb" aria-hidden="true"></i>
+    </a>
   </nav>
 </body>
 </html>
