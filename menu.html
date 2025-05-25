@@ -4,9 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MENU</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .responsive-iframe {
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%; /* アスペクト比を調整（4:3） */
+      height: 0;
+      overflow: hidden;
+    }
+    .responsive-iframe iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 <body>
   <h1>メニュー</h1>
-  <iframe src="menu250525.jpg.jpg" width="100%" height="600px"></iframe>
+  <div class="responsive-iframe">
+    <iframe src="menu250525.jpg.jpg"></iframe>
+  </div>
 </body>
 </html>
