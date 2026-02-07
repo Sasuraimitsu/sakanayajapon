@@ -84,8 +84,17 @@
   </style>
   <script>
     function switchLang(lang) {
+      // コンテンツの切り替え
       document.getElementById('content-ja').style.display = lang === 'ja' ? '' : 'none';
       document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
+      
+      // LINEボタンの文字切り替え
+      const lineBtnText = document.querySelector('.floating-btn span');
+      if (lang === 'ja') {
+        lineBtnText.innerText = '📲 LINEで注文';
+      } else {
+        lineBtnText.innerText = '📲 Order by LINE';
+      }
     }
   </script>
 </head>
