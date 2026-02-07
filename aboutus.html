@@ -81,6 +81,29 @@
     .cta-button:hover {
       background-color: #0056b3;
     }
+    /* ボタンのスタイルを調整 */
+    .cta-button {
+      display: inline-block;
+      background-color: #007BFF;
+      color: #fff;
+      padding: 12px 24px; /* 上下を少し詰め、横を広げる */
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px; /* メインの文字サイズ */
+      line-height: 1.4; /* 行間を適切に空ける */
+      transition: 0.3s;
+      min-width: 280px; /* ボタンが小さくなりすぎないように */
+    }
+
+    /* ボタン内の2行目（注意書き）用のスタイル */
+    .cta-note {
+      display: block; /* 改行させる */
+      font-size: 13px; /* 少し小さくする */
+      font-weight: normal; /* 細くする */
+      margin-top: 4px; /* 上の文字との間隔 */
+      opacity: 0.9; /* 少しだけ色を薄くして情報の優先度を下げる */
+    }
   </style>
   <script>
     function switchLang(lang) {
