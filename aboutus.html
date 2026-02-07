@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ABOUT US - Multilingual</title>
   <style>
+    /* 4. スマホ・タブレット向けの調整 */
+    @media (max-width: 768px) {
+      body { margin: 10px; padding-top: 70px; } /* 余白を狭くして画面を広く使う */
+      
+      h1 { font-size: 1.4rem; line-height: 1.4; } /* 見出しを少し小さく、読みやすく */
+      
+      .cta-button, .btn-order { 
+        width: 100%; /* ボタンを横幅いっぱいに（親指で押しやすくなる） */
+        box-sizing: border-box;
+      }
+      
+      nav { padding: 10px 15px; }
+      nav a { font-size: 13px; margin-left: 10px; } /* メニューがはみ出さないよう調整 */
+    }
     /* ナビゲーションの見た目（追加分） */
     nav { 
       position: fixed; top: 0; left: 0; width: 100%; 
