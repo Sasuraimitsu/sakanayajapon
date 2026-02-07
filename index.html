@@ -6,131 +6,118 @@
   <title>Sakanaya Japon - Official Linktree</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* 全体設定 */
+    /* 1. 背景の設定（氷の上の魚） */
     body { 
       font-family: 'Helvetica Neue', Arial, sans-serif; 
       margin: 0; 
-      padding: 40px 20px; 
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 薄いブルーの背景 */
+      padding: 0; 
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center; /* 中央に配置 */
+
+      /* お写真の設定：ファイル名を合わせてください */
+      background-image: url('your-fish-photo.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
-    /* ロゴ */
-    .logo-container {
-      margin-bottom: 30px;
-    }
-    .logo-container img {
-      width: 150px;
-      height: auto;
-      border-radius: 50%; /* ロゴを丸く見せる場合 */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: #fff;
-      padding: 10px;
+    /* 2. 全体を少し暗くして写真を引き締めるオーバーレイ */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.3); /* 30%だけ暗くする（鮮度感を殺さない程度） */
+      z-index: -1;
     }
 
-    /* メニューコンテナ */
-    nav {
-      width: 100%;
+    /* 3. ロゴとメニューを包む「磨りガラス」の箱 */
+    .main-card {
+      width: 90%;
       max-width: 400px;
+      padding: 40px 20px;
+      /* 磨りガラス効果 */
+      background: rgba(255, 255, 255, 0.8); 
+      backdrop-filter: blur(10px); 
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
 
-    /* リンクボタンの共通スタイル */
+    /* 4. ロゴの影を調整（お魚の青に合わせた影） */
+    .logo-container img {
+      width: 140px;
+      filter: drop-shadow(0 5px 15px rgba(0, 123, 255, 0.2));
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      color: #333;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      letter-spacing: 0.05em;
+    }
+
+    /* 5. リンクボタンの調整 */
     nav a {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 15px;
-      padding: 16px;
+      margin-bottom: 12px;
+      padding: 15px;
       background: #ffffff;
-      color: #333;
+      color: #0056b3; /* 濃いめの青 */
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 15px;
       font-weight: bold;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
+      transition: 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       position: relative;
     }
 
-    /* アイコンを左側に配置 */
+    nav a:hover {
+      background: #007BFF;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* アイコンの色 */
     nav a i:first-child {
       position: absolute;
       left: 20px;
-      font-size: 1.2em;
-      color: #007BFF;
     }
 
-    /* ホバー（タップ）時の動き */
-    nav a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      background: #007BFF;
-      color: #fff;
-    }
-    nav a:hover i:first-child {
-      color: #fff;
-    }
-
-    /* Facebookボタンの特別スタイル */
+    /* Facebookボタン */
     nav a.facebook-like {
       background: #1877f2;
       color: white;
-      margin-top: 25px;
-    }
-    nav a.facebook-like i:first-child {
-      color: white;
-    }
-
-    /* 親指アイコンのアニメーション */
-    .thumb {
-      margin-left: 10px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    /* キャッチコピー */
-    .tagline {
-      color: #555;
-      font-size: 0.9rem;
-      margin-bottom: 25px;
-      font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+  <div class="main-card">
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Sakanaya Japon">
+    </div>
 
-  <div class="logo-container">
-    <img src="logo.jpg" alt="Sakanaya Japon">
+    <div class="tagline">海のある日常を、カンボジアの食卓に。</div>
+
+    <nav>
+      <a href="menu.html"><i class="fa-solid fa-utensils"></i> MENU</a>
+      <a href="howto.html"><i class="fa-solid fa-circle-play"></i> HOW TO ORDER</a>
+      <a href="q&a.html"><i class="fa-solid fa-circle-question"></i> Q&A</a>
+      <a href="aboutus.html"><i class="fa-solid fa-house-chimney"></i> ABOUT US</a>
+
+      <a href="https://www.facebook.com/share/15UgiCCdu4/" class="facebook-like" target="_blank">
+        Please like on Facebook <i class="fa-solid fa-thumbs-up thumb"></i>
+      </a>
+    </nav>
   </div>
-
-  <div class="tagline">海のある日常を、カンボジアの食卓に。</div>
-
-  <nav>
-    <a href="menu.html">
-      <i class="fa-solid fa-utensils"></i> MENU
-    </a>
-    <a href="howto.html">
-      <i class="fa-solid fa-circle-play"></i> HOW TO ORDER
-    </a>
-    <a href="q&a.html">
-      <i class="fa-solid fa-circle-question"></i> Q&A
-    </a>
-    <a href="aboutus.html">
-      <i class="fa-solid fa-house-chimney"></i> ABOUT US
-    </a>
-
-    <a href="https://www.facebook.com/share/15UgiCCdu4/" class="facebook-like" target="_blank" rel="noopener">
-      Please like on Facebook
-      <i class="fa-solid fa-thumbs-up thumb"></i>
-    </a>
-  </nav>
-
 </body>
 </html>
