@@ -3,56 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sakanaya Japon</title>
-  <!-- Font Awesome CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pEI6qI7tBSibG1LjFjoFjv5+u6Fnal1XJoWy8g5W6ibc+6qUu8Aj9LjV8E5TCF0p+fW7XcKsdx0hoxYDEb5HcA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <title>Sakanaya Japon - Official Linktree</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
-    img { max-width: 100%; height: auto; }
-    nav a {
-      display: block; margin: 10px auto; padding: 10px; max-width: 300px;
-      background: #007BFF; color: white; text-decoration: none; border-radius: 5px;
-    }
-    /* Facebookいいね！用のアイコン点滅 */
-    nav a.facebook-like {
-      display: inline-flex;
+    /* 全体設定 */
+    body { 
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      margin: 0; 
+      padding: 40px 20px; 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 薄いブルーの背景 */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      background: #1877f2;  /* Facebookブルー */
     }
-    .thumb {
-      margin-left: 0.5em;
+
+    /* ロゴ */
+    .logo-container {
+      margin-bottom: 30px;
+    }
+    .logo-container img {
+      width: 150px;
+      height: auto;
+      border-radius: 50%; /* ロゴを丸く見せる場合 */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
+      padding: 10px;
+    }
+
+    /* メニューコンテナ */
+    nav {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* リンクボタンの共通スタイル */
+    nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      padding: 16px;
+      background: #ffffff;
+      color: #333;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* アイコンを左側に配置 */
+    nav a i:first-child {
+      position: absolute;
+      left: 20px;
       font-size: 1.2em;
-      animation: blink 1s infinite;
+      color: #007BFF;
     }
-    @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75%     { opacity: 0; }
+
+    /* ホバー（タップ）時の動き */
+    nav a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      background: #007BFF;
+      color: #fff;
+    }
+    nav a:hover i:first-child {
+      color: #fff;
+    }
+
+    /* Facebookボタンの特別スタイル */
+    nav a.facebook-like {
+      background: #1877f2;
+      color: white;
+      margin-top: 25px;
+    }
+    nav a.facebook-like i:first-child {
+      color: white;
+    }
+
+    /* 親指アイコンのアニメーション */
+    .thumb {
+      margin-left: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* キャッチコピー */
+    .tagline {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <img src="logo.jpg" alt="Sakanaya Japon ロゴ" width="200">
+
+  <div class="logo-container">
+    <img src="logo.jpg" alt="Sakanaya Japon">
+  </div>
+
+  <div class="tagline">海のある日常を、カンボジアの食卓に。</div>
+
   <nav>
-    <a href="menu.html">MENU</a>
-    <a href="howto.html">HOW TO ORDER</a>
-    <a href="q&a.html">Q&A</a>
-    <a href="aboutus.html">ABOUT US</a>
-    <!-- ここが Facebook いいね！リンク -->
-    <a
-      href="https://www.facebook.com/share/15UgiCCdu4/"
-      class="facebook-like"
-      target="_blank"
-      rel="noopener"
-    >
-      Please like! on Facebook
-      <i class="fa-solid fa-thumbs-up thumb" aria-hidden="true"></i>
+    <a href="menu.html">
+      <i class="fa-solid fa-utensils"></i> MENU
+    </a>
+    <a href="howto.html">
+      <i class="fa-solid fa-circle-play"></i> HOW TO ORDER
+    </a>
+    <a href="q&a.html">
+      <i class="fa-solid fa-circle-question"></i> Q&A
+    </a>
+    <a href="aboutus.html">
+      <i class="fa-solid fa-house-chimney"></i> ABOUT US
+    </a>
+
+    <a href="https://www.facebook.com/share/15UgiCCdu4/" class="facebook-like" target="_blank" rel="noopener">
+      Please like on Facebook
+      <i class="fa-solid fa-thumbs-up thumb"></i>
     </a>
   </nav>
+
 </body>
 </html>
