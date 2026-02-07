@@ -23,6 +23,28 @@
     ul { padding-left: 20px; }
     .lang-toggle { text-align: center; margin-bottom: 20px; }
     .lang-toggle button { margin: 0 10px; padding: 8px 16px; font-size: 14px; }
+    /* 画面右下に浮くボタンの見た目 */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #00b900; /* LINEをイメージした緑色 */
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px; /* 丸みのあるデザイン */
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 9999; /* 他の要素より上に表示 */
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+    .floating-btn:hover {
+      background-color: #009e00;
+      transform: scale(1.05); /* 少し大きくしてクリック感を出す */
+      transition: 0.2s;
+    }
   </style>
   <script>
     function switchLang(lang) {
@@ -96,6 +118,9 @@
     <li>お子様が楽しめるお魚教室の開催</li>
     <li>地域の方との交流や食文化の普及活動</li>
   </ul>
+    <a href="https://line.me/R/ti/p/@sakanayajapan" class="floating-btn">
+    <span>📲 LINEで注文</span>
+  </a>
 </body>
   </div>
 
@@ -129,5 +154,8 @@
       <li>Community engagement and food culture education</li>
     </ul>
   </div>
+  <a href="https://line.me/R/ti/p/@sakanayajapan" class="floating-btn">
+    <span>📲 Order by LINE</span>
+  </a>
 </body>
 </html>
