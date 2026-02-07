@@ -5,38 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Q&A - Multilingual</title>
   <style>
-    /* ナビゲーションを上部に固定 */
-nav { 
-  position: fixed; top: 0; left: 0; width: 100%; 
-  background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-  z-index: 1000; display: flex; justify-content: space-between; 
-  align-items: center; padding: 10px 20px; box-sizing: border-box; 
-}
-nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
-.nav-logo { color: #007BFF !important; }
-
-/* メニューで隠れないよう余白を追加 */
-body { padding-top: 70px; }
-
-/* 画面右下の注文ボタン */
-.floating-btn {
-  position: fixed; bottom: 20px; right: 20px; 
-  background-color: #00b900; color: white; padding: 12px 20px;
-  border-radius: 50px; text-decoration: none; font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;
-}
-    body { font-family: sans-serif; margin: 20px; padding: 0; }
-    h1 { text-align: center; color: #007BFF; }
-    .qa-section { margin-bottom: 30px; }
-    .qa-section h2 { color: #007BFF; }
-    .qa-item { margin-bottom: 20px; }
-    .qa-item strong { display: block; margin-bottom: 5px; }
-    input[type="text"] {
-      width: 100%; padding: 10px; margin-bottom: 20px;
-      font-size: 16px; box-sizing: border-box;
+    /* 1. ナビゲーションバー（共通） */
+    nav { 
+      position: fixed; top: 0; left: 0; width: 100%; 
+      background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+      z-index: 1000; display: flex; justify-content: space-between; 
+      align-items: center; padding: 10px 20px; box-sizing: border-box; 
     }
-    .lang-toggle { text-align: center; margin-bottom: 20px; }
-    .lang-toggle button { margin: 0 10px; padding: 8px 16px; font-size: 14px; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
+    .nav-logo { color: #007BFF !important; }
+
+    /* 2. 全体レイアウトの整理 */
+    body { 
+      font-family: sans-serif; 
+      line-height: 1.8; 
+      margin: 0; 
+      padding: 90px 20px 20px 20px; /* 上に大きな余白(90px)を空けてナビとの重なりを解消 */
+      color: #333; 
+    }
+
+    /* 3. 言語切り替えボタン（ここを改良） */
+    .lang-toggle { 
+      text-align: center; 
+      margin-bottom: 30px; 
+      padding: 10px;
+    }
+    .lang-toggle button { 
+      margin: 0 5px; 
+      padding: 10px 20px; 
+      font-size: 14px; 
+      cursor: pointer;
+      border: 1px solid #007BFF;
+      background-color: #fff;
+      color: #007BFF;
+      border-radius: 25px;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+    /* ボタンにマウスを乗せた時 */
+    .lang-toggle button:hover {
+      background-color: #e7f3ff;
+    }
+
+    /* 4. Q&A 検索・コンテンツ */
+    h1 { text-align: center; color: #007BFF; margin-top: 0; }
+    .qa-section { margin-bottom: 30px; }
+    .qa-section h2 { color: #007BFF; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .qa-item { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; }
+    .qa-item strong { display: block; margin-bottom: 5px; color: #0056b3; }
+    
+    input[type="text"] {
+      width: 100%; padding: 12px; margin-bottom: 20px;
+      font-size: 16px; box-sizing: border-box;
+      border: 2px solid #007BFF; border-radius: 8px;
+    }
+
+    /* 5. フローティングボタン */
+    .floating-btn {
+      position: fixed; bottom: 20px; right: 20px; 
+      background-color: #00b900; color: white; padding: 12px 20px;
+      border-radius: 50px; text-decoration: none; font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;
+    }
   </style>
   <script>
     function switchLang(lang) {
