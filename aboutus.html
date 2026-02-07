@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ABOUT US - Multilingual</title>
   <style>
+    /* ナビゲーションの見た目（追加分） */
+    nav { 
+      position: fixed; top: 0; left: 0; width: 100%; 
+      background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+      z-index: 1000; display: flex; justify-content: space-between; 
+      align-items: center; padding: 10px 20px; box-sizing: border-box; 
+    }
+    nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
+    /* メニューが被らないようにbodyの余白を調整 */
+    body { padding-top: 60px; }
     body { font-family: sans-serif; line-height: 1.8; margin: 20px; color: #333; }
     h1, h2 { color: #007BFF; }
     h1 { text-align: center; }
