@@ -45,6 +45,28 @@
       transform: scale(1.05); /* 少し大きくしてクリック感を出す */
       transition: 0.2s;
     }
+    /* セクション末尾のボタンエリア */
+    .cta-container {
+      text-align: center;
+      margin: 40px 0;
+      padding: 30px;
+      background: #f0f7ff; /* 薄い青色で背景を敷いて目立たせる */
+      border-radius: 12px;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #007BFF;
+      color: #fff;
+      padding: 16px 32px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #0056b3;
+    }
   </style>
   <script>
     function switchLang(lang) {
@@ -84,6 +106,10 @@
      お魚を通じて、日本の味がつながること。<br>
      お魚を通じて、「おいしい」が「うれしい」に変わる瞬間。</p>
   <p>そんなささやかな奇跡を、今日も皆さまのご家庭へお届けしたいと考えています。</p>
+　<div class="cta-container">
+    <p style="margin-top:0;">旬の魚介やお得なセットをチェック！</p>
+    <a href="#order-section" class="cta-button">メニューを見て注文する</a>
+  </div>
 
   <h2>🧊 サービス内容</h2>
   <p><strong>鮮魚の販売（姿売り・加工済み）</strong><br>
@@ -131,7 +157,10 @@
     <p>We started this shop to fulfill that wish—to make sashimi possible at home, to bring Japanese flavors to your children, and to help you enjoy hand-roll sushi with friends.</p>
     <p>By working with local fishermen and importing fresh seafood from Japan, we bring quality that rivals Japan itself. We also prepare sashimi, sushi sets, and easy-prep dishes for busy families.</p>
     <p><strong>We want to bring “a life with seafood” back to Cambodia, and help your table shine with joy.</strong></p>
-
+　　<div class="cta-container">
+    <p style="margin-top:0;">Check out our seasonal seafood & special sets!</p>
+    <a href="#order-section" class="cta-button">Order via menu</a>
+  </div>
     <h2>🧊 Services</h2>
     <p><strong>Fresh Fish (whole or processed)</strong><br>We clean or prepare fish for sashimi as needed.</p>
     <p><strong>Omakase Sets</strong><br>・Sashimi Platter<br>・Local Fish Sashimi Platter<br>・Matsuri sushi Platter<br>・Hand-Roll Sushi Set</p>
