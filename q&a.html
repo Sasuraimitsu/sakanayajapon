@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Q&A - Multilingual</title>
   <style>
+    /* ナビゲーションを上部に固定 */
+nav { 
+  position: fixed; top: 0; left: 0; width: 100%; 
+  background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  z-index: 1000; display: flex; justify-content: space-between; 
+  align-items: center; padding: 10px 20px; box-sizing: border-box; 
+}
+nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
+.nav-logo { color: #007BFF !important; }
+
+/* メニューで隠れないよう余白を追加 */
+body { padding-top: 70px; }
+
+/* 画面右下の注文ボタン */
+.floating-btn {
+  position: fixed; bottom: 20px; right: 20px; 
+  background-color: #00b900; color: white; padding: 12px 20px;
+  border-radius: 50px; text-decoration: none; font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;
+}
     body { font-family: sans-serif; margin: 20px; padding: 0; }
     h1 { text-align: center; color: #007BFF; }
     .qa-section { margin-bottom: 30px; }
@@ -34,6 +54,13 @@
   </script>
 </head>
 <body>
+<nav>
+  <a href="index.html" class="nav-logo">SAKANAYA JAPON</a>
+  <div>
+    <a href="index.html">TOP</a>
+    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4">ORDER</a>
+  </div>
+</nav>
 
 <div class="lang-toggle">
   <button onclick="switchLang('ja')">日本語</button>
@@ -147,6 +174,8 @@
     <strong>Hours:</strong> Monday–Saturday, 11:30 AM to 6:30 PM (Except national holidays)</p>
   </div>
 </div>
-
+<a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="floating-btn">
+  <span>📲 LINEで注文</span>
+</a>
 </body>
 </html>
