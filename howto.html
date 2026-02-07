@@ -47,15 +47,58 @@
     li { margin-bottom: 10px; color: #d32f2f; font-weight: bold; }
 
     /* 共通フローティングボタン */
-    .floating-btn {
-      position: fixed; bottom: 20px; right: 20px; 
-      background-color: #00b900; color: white; padding: 12px 20px;
-      border-radius: 50px; text-decoration: none; font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;
+    /* 2つのボタンを包むコンテナ */
+    .floating-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column; /* 縦に並べる（スマホで押しやすい） */
+      gap: 10px; /* ボタン同士の間隔 */
+      z-index: 9999;
+    }
+
+    /* 各ボタンの共通スタイル */
+    .float-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      min-width: 160px;
+    }
+
+    .float-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* LINEボタン（緑） */
+    .btn-line {
+      background-color: #00b900;
+    }
+
+    /* Telegramボタン（青） */
+    .btn-tele {
+      background-color: #0088cc;
+    }
+
+    /* アイコンの余白 */
+    .float-btn i, .float-btn span {
+      margin-right: 8px;
     }
 
     @media (max-width: 768px) {
-      body { padding: 80px 15px 15px 15px; }
+      .float-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+        min-width: 140px;
+      }
     }
   </style>
 </head>
@@ -85,10 +128,15 @@
     <li>For sashimi orders, we kindly request you place your order at least two hours in advance of your pick-up.</li>
   </ul>
 </div>
-
-<a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="floating-btn">
-  <span>📲 LINEで注文</span>
-</a>
+<div class="floating-container">
+    <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank">
+      <i class="fa-brands fa-telegram"></i> Order by Telegram
+    </a>
+    
+    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank">
+      <span>📲</span> Order by LINE
+    </a>
+  </div>
 
 </body>
 </html>
