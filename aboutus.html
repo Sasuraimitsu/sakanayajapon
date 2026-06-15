@@ -79,6 +79,11 @@
       background-color: #0088cc;
     }
 
+    /* Facebook Messengerボタン */
+    .btn-fb {
+      background-color: #0084ff;
+    }
+
     /* アイコンの余白 */
     .float-btn i, .float-btn span {
       margin-right: 8px;
@@ -142,14 +147,6 @@
       // コンテンツの切り替え
       document.getElementById('content-ja').style.display = lang === 'ja' ? '' : 'none';
       document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
-      
-      // LINEボタンの文字切り替え
-      const lineBtnText = document.querySelector('.floating-btn span');
-      if (lang === 'ja') {
-        lineBtnText.innerText = '📲 Order by LINE';
-      } else {
-        lineBtnText.innerText = '📲 Order by LINE';
-      }
     }
   </script>
 </head>
@@ -206,7 +203,10 @@
   ご自宅で「解凍するだけ」「温めるだけ」で食べられるお惣菜も人気です。</p>
 
   <p><strong>オンライン注文システム</strong><br>
-  LINEから簡単にご注文いただける仕組みを整えています。</p>
+  LINE・Telegram・Facebook Messenger から簡単にご注文いただける仕組みを整えています。</p>
+
+  <p><strong>鮪の解体ショー（イベント・出張対応）</strong><br>
+  レストランやイベント会場で、エンターテインメント性のある鮪の解体ショーを実施します。</p>
 
   <p><strong>子どもや家族、友人同士で楽しめる食体験の提供</strong><br>
   ご自宅で、誰でも手軽に魚を楽しめるような商品開発を進めています。</p>
@@ -214,9 +214,12 @@
   <h2>会社情報</h2>
   <ul>
     <li><strong>社名：</strong>SAKANAYA JAPON</li>
-    <li><strong>住所：</strong>#72BE0, Street 174, Phum 11, Sangkat Phar Thmey III, Khan Daun Penh, Phnom Penh.</li>
-    <li><strong>電話番号：</strong>016-881-370</li>
-    <li><strong>営業時間：</strong>月〜土 11:30〜18:30（祝日を除く）</li>
+    <li><strong>設立：</strong>2024年12月19日</li>
+    <li><strong>住所：</strong>#72BE0, Street 174, Phum 11, Sangkat Phsar Thmey 3, Khan Daun Penh, Phnom Penh, Cambodia</li>
+    <li><strong>電話番号：</strong>016-881-370（+855 16 881 370）</li>
+    <li><strong>営業時間：</strong>毎日 10:00〜19:30（国民の休日を除く）</li>
+    <li><strong>ご注文・お問い合わせ：</strong>LINE / Telegram / <a href="https://www.facebook.com/share/15UgiCCdu4/" target="_blank">Facebook Messenger</a></li>
+    <li><strong>Email：</strong>fishstorejapan@gmail.com</li>
   </ul>
 
   <h2>活動内容</h2>
@@ -224,20 +227,12 @@
     <li>地域イベントへの参加</li>
     <li>お子様が楽しめるお魚教室の開催</li>
     <li>地域の方との交流や食文化の普及活動</li>
+    <li>地元漁師との公正な取引・持続可能な水産業の支援</li>
   </ul>
-    <div class="floating-container">
-    <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank">
-      <i class="fa-brands fa-telegram"></i> Order by Telegram
-    </a>
-    
-    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank">
-      <span>📲</span> Order by LINE
-    </a>
-  </div>
   </div>
 
   <div id="content-en" style="display: none;">
-    <h1>🐟 Our Vision — “A Taste of the Sea, For Every Cambodian Homen Home”</h1>
+    <h1>🐟 Our Vision — “A Taste of the Sea, For Every Cambodian Home”</h1>
     <p>In Japan, fish is a familiar presence at every meal. From early-morning market runs to family dinners with sashimi and weekend sushi parties, seafood is more than food—it’s a way to share warmth and connection.</p>
     <p>In Cambodia, where river fish are more common and sea fish are rare, that familiarity is harder to find. Many people feel a longing for the sea.</p>
     <p>We started this shop to fulfill that wish—to make sashimi possible at home, to bring Japanese flavors to your children, and to help you enjoy hand-roll sushi with friends.</p>
@@ -254,15 +249,19 @@
     <p><strong>Fresh Fish (whole or processed)</strong><br>We clean or prepare fish for sashimi as needed.</p>
     <p><strong>Omakase Sets</strong><br>・Sashimi Platter<br>・Local Fish Sashimi Platter<br>・Matsuri sushi Platter<br>・Hand-Roll Sushi Set</p>
     <p><strong>Easy-prep Side Dishes</strong><br>Ready-to-eat items that can be thawed or warmed at home.</p>
-    <p><strong>Online Ordering</strong><br>Order easily via LINE.</p>
+    <p><strong>Online Ordering</strong><br>Order easily via LINE, Telegram, or Facebook Messenger.</p>
+    <p><strong>Tuna Cutting Show (events &amp; on-site)</strong><br>We perform live tuna-cutting shows at restaurants and event venues.</p>
     <p><strong>Enjoyable Food Experience</strong><br>We develop products that families and friends can enjoy together at home.</p>
 
     <h2>Company Info</h2>
     <ul>
       <li><strong>Name:</strong> SAKANAYA JAPON</li>
-      <li><strong>Address:</strong> #72BE0, Street 174, Phnom Penh</li>
-      <li><strong>Phone:</strong> 016-881-370</li>
-      <li><strong>Hours:</strong> Mon–Sat 11:30am–6:30pm (Closed holidays)</li>
+      <li><strong>Established:</strong> December 19, 2024</li>
+      <li><strong>Address:</strong> #72BE0, Street 174, Phum 11, Sangkat Phsar Thmey 3, Khan Daun Penh, Phnom Penh, Cambodia</li>
+      <li><strong>Phone:</strong> +855 16 881 370</li>
+      <li><strong>Hours:</strong> Daily 10:00am–7:30pm (Closed on public holidays)</li>
+      <li><strong>Order / Contact:</strong> LINE / Telegram / <a href="https://www.facebook.com/share/15UgiCCdu4/" target="_blank">Facebook Messenger</a></li>
+      <li><strong>Email:</strong> fishstorejapan@gmail.com</li>
     </ul>
 
     <h2>Activities</h2>
@@ -270,6 +269,7 @@
       <li>Participation in local events</li>
       <li>Fish workshops for children</li>
       <li>Community engagement and food culture education</li>
+      <li>Fair trade with local fishermen and support for sustainable fisheries</li>
     </ul>
   </div>
   <div class="floating-container">
@@ -279,6 +279,10 @@
     
     <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank">
       <span>📲</span> Order by LINE
+    </a>
+
+    <a href="https://www.facebook.com/share/15UgiCCdu4/" class="float-btn btn-fb" target="_blank">
+      <span>💬</span> Order by Facebook
     </a>
   </div>
 </body>
