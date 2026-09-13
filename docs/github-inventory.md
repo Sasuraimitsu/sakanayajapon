@@ -98,8 +98,14 @@ Archive するだけでは**公開状態は続き、40件の価格は誰でも�
 
 ### 移管対象
 
+- `Sasuraimitsu/sakanaya-punch` → `sakanaya-japon/sakanaya-punch`（**最優先**。出勤記録システムのため先行実施）
 - `Sasuraimitsu/sakanayajapon` → `sakanaya-japon/sakanayajapon`
-- `Sasuraimitsu/sakanaya-punch` → `sakanaya-japon/sakanaya-punch`
+
+**2026-09-13 決定事項**
+
+- `sakanaya-punch` を**他より先に**移管する。手順は `docs/punch-migration.md` に分離
+- `sakanaya-punch` は **public のまま**運用する（GitHub Pages で打刻ページを配信しているため）
+- `sakanaya-punch` は**今後も独立したリポジトリとして維持し、`sakanayajapon` には統合しない**
 
 ### 手順（1リポジトリあたり）
 
@@ -134,8 +140,9 @@ Archive するだけでは**公開状態は続き、40件の価格は誰でも�
 ### 移管前に決めておくこと
 
 - **Org の Owner を2名以上にする**。1名だとアカウント喪失時に全サイトが復旧不能になります
-- `sakanaya-punch`（勤怠管理）は移管と同時に **private 化**を検討。
-  従業員名・打刻データがクライアント側に出ているなら公開は避けるべきです（要中身確認）
+- ~~`sakanaya-punch` の private 化~~ → **public のまま維持で確定**。
+  中身を確認した結果、認証情報・従業員データの混入はなく、認証は短命トークン+PINでGAS側実装のため
+  （詳細は `docs/punch-migration.md`）
 
 ### 独自ドメインについて（今回は見送り）
 

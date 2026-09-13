@@ -90,6 +90,8 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 |---|---|
 | `docs/github-inventory.md` | 全リポジトリの棚卸し、Organization への移管手順 |
 | `docs/contact-points.md` | 営業時間・注文窓口の食い違いと統一案 |
+| `docs/punch-migration.md` | `sakanaya-punch` の Organization 移管手順（先行実施） |
+| `docs/apply-repo-metadata.py` | 全リポジトリの description / topics を一括設定するスクリプト |
 
 ### Phase 1（未着手）
 
