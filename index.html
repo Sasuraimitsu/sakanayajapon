@@ -4,17 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SAKANAYA JAPON｜海のある日常を、カンボジアの食卓に。</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="icon" href="logo.jpg">
   <meta name="description" content="カンボジア・プノンペンの魚屋 SAKANAYA JAPON。日本の鮮度管理で、刺身・鮮魚・お惣菜をご家庭へ。LINE・Telegram・Facebook Messenger で注文できます。">
-  <!-- OGP（FacebookやLINE等でシェアした際のプレビュー用） -->
+  <!-- OGP（FacebookやLINE等でシェアした際のプレビュー用）
+       ※ Organization 移管後は下記2行のURLを差し替えること（docs/github-inventory.md §3） -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="SAKANAYA JAPON｜海のある日常を、カンボジアの食卓に。">
   <meta property="og:description" content="プノンペンの魚屋。日本の鮮度管理で刺身・鮮魚・お惣菜をお届け。LINE・Telegram・Facebook Messenger で注文OK。">
   <meta property="og:image" content="https://sasuraimitsu.github.io/sakanayajapon/logo.jpg">
   <meta property="og:url" content="https://sasuraimitsu.github.io/sakanayajapon/">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- 営業時間・窓口URLは site-info.js が唯一の情報源。common.js が日英切替と流し込みを行う -->
+  <script src="assets/js/site-info.js" defer></script>
+  <script src="assets/js/common.js" defer></script>
+
   <style>
+    /* ── ロゴから取った配色 ──────────────────────────────
+       赤: 鯛とロープ / 紺: 波。タイルの輪・文字・ホバーに使う */
+    :root {
+      --red: #d9363e;
+      --red-dark: #b8262e;
+      --navy: #2b4c8c;
+      --navy-deep: #12324f;
+      --ink: #1c2430;
+      --tile: rgba(255, 255, 255, 0.90);
+    }
+
     /* 1. 全体：魚の写真を全面に敷き、白で透かす */
     body {
       font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
@@ -25,7 +41,7 @@
       flex-direction: column;
       align-items: center;
       background: #dfe7ee; /* 画像読込前のフォールバック色（薄い青灰） */
-      color: #12324f;
+      color: var(--ink);
     }
 
     /* 背景スライドショー（複数写真をフェードで切り替え） */
@@ -59,7 +75,7 @@
       gap: 8px;
       width: 100%;
       padding: 11px 16px;
-      background: #12324f;
+      background: var(--navy-deep);
       color: #eaf2f8;
       text-decoration: none;
       font-size: 13px;
@@ -70,92 +86,191 @@
     }
     .biz-bar:hover { background: #1a4468; }
     .biz-bar .biz-arrow { opacity: 0.75; }
-    .biz-bar-en { opacity: 0.7; font-weight: normal; }
 
-    /* 4. 本体：箱で囲わず、画面幅いっぱいに広げる */
+    /* 4. 言語切替（右上） */
+    .top-row {
+      width: 100%;
+      max-width: 1040px;
+      box-sizing: border-box;
+      padding: 12px 16px 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .lang-toggle {
+      display: flex;
+      border: 1px solid rgba(43, 76, 140, 0.35);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .lang-toggle button {
+      appearance: none;
+      border: 0;
+      background: none;
+      font: inherit;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--navy);
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-toggle button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+    .lang-toggle button:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+
+    /* 5. 本体：箱で囲わず、画面幅いっぱいに広げる */
     .main {
       width: 100%;
       max-width: 1040px;
       margin: auto 0;              /* 縦方向の中央寄せ */
-      padding: 36px 16px 48px;
+      padding: 16px 16px 48px;
       box-sizing: border-box;
       text-align: center;
     }
 
     .logo-container img {
-      width: 150px;
-      border-radius: 24px;
+      width: 160px;
+      border-radius: 26px;
       filter: drop-shadow(0 6px 18px rgba(10, 26, 43, 0.22));
-      margin-bottom: 12px;
+    }
+
+    .site-title {
+      font-size: 34px;
+      letter-spacing: 0.12em;
+      color: var(--navy-deep);
+      margin: 14px 0 4px;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
     .tagline {
-      color: #12324f;
-      font-size: 1rem;
+      font-size: 18px;
       font-weight: bold;
+      color: var(--navy);
       line-height: 1.8;
-      margin: 0 0 30px;
-      letter-spacing: 0.05em;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+      margin: 0 0 32px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    .tagline small {
+      display: block;
+      font-size: 15px;
+      font-weight: normal;
+      color: var(--ink);
+      opacity: 0.85;
     }
 
-    /* 5. カテゴリータイル：スマホ2列、タブレット以上3列 */
+    /* 6. 丸いカテゴリータイル：スマホ2列、タブレット以上3列
+       輪はロゴのロープ（赤の二重線）を模したもの */
     nav {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 780px;
+      margin: 0 auto;
     }
     @media (min-width: 720px) {
-      nav { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
     }
 
     nav a {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      min-height: 128px;
-      padding: 24px 14px;
-      background: rgba(255, 255, 255, 0.86);
+      gap: 6px;
+      padding: 14%;
+      box-sizing: border-box;
+      background: var(--tile);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      color: #0056b3;
+      border: 3px solid var(--red);
+      box-shadow:
+        inset 0 0 0 4px #fff,
+        inset 0 0 0 6px rgba(217, 54, 62, 0.35),
+        0 8px 22px rgba(10, 26, 43, 0.14);
+      color: var(--navy);
       text-decoration: none;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 1.4;
-      box-shadow: 0 6px 20px rgba(10, 26, 43, 0.12);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
     }
-    nav a i { font-size: 30px; }
+
+    /* 輪の中に店のロゴを薄く透かす */
+    nav a::before {
+      content: "";
+      position: absolute;
+      right: -18%;
+      bottom: -26%;
+      width: 72%;
+      aspect-ratio: 1 / 1;
+      background: url('logo.jpg') center / contain no-repeat;
+      opacity: 0.09;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    nav a > * { position: relative; }
+
+    nav a svg {
+      width: 38px;
+      height: 38px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    nav a .t { font-size: 17px; font-weight: bold; line-height: 1.3; letter-spacing: 0.02em; }
+    nav a .s { font-size: 12.5px; opacity: 0.8; line-height: 1.3; }
 
     nav a:hover {
-      background: #007BFF;
+      background: var(--navy);
       color: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(10, 26, 43, 0.2);
+      transform: translateY(-4px);
+      box-shadow:
+        inset 0 0 0 4px var(--navy),
+        inset 0 0 0 6px rgba(255, 255, 255, 0.45),
+        0 14px 30px rgba(10, 26, 43, 0.22);
     }
+    nav a:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 
-    /* Telegramボタン */
-    nav a.telegram { background: #0088cc; color: #fff; }
-    nav a.telegram:hover { background: #0071ab; }
+    /* Telegram / Facebook は各サービスの色。ロゴ透かしは付けない */
+    nav a.telegram, nav a.facebook-like {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.85);
+    }
+    nav a.telegram { background: #0088cc; box-shadow: inset 0 0 0 4px #0088cc, inset 0 0 0 6px rgba(255,255,255,.45), 0 8px 22px rgba(10,26,43,.14); }
+    nav a.facebook-like { background: #1877f2; box-shadow: inset 0 0 0 4px #1877f2, inset 0 0 0 6px rgba(255,255,255,.45), 0 8px 22px rgba(10,26,43,.14); }
+    nav a.telegram::before, nav a.facebook-like::before { display: none; }
+    nav a.telegram:hover { background: #0071ab; box-shadow: inset 0 0 0 4px #0071ab, inset 0 0 0 6px rgba(255,255,255,.45), 0 14px 30px rgba(10,26,43,.22); }
+    nav a.facebook-like:hover { background: #1462c9; box-shadow: inset 0 0 0 4px #1462c9, inset 0 0 0 6px rgba(255,255,255,.45), 0 14px 30px rgba(10,26,43,.22); }
 
-    /* Facebookボタン */
-    nav a.facebook-like { background: #1877f2; color: #fff; }
-    nav a.facebook-like:hover { background: #1462c9; }
+    /* 7. 言語別ブロック（common.js が html[lang] を切り替える。JS無効時は日本語） */
+    [data-lang] { display: none; }
+    [data-lang="ja"] { display: block; }
+    html[lang="ja"] [data-lang="ja"] { display: block; }
+    html[lang="ja"] [data-lang="en"] { display: none; }
+    html[lang="en"] [data-lang="en"] { display: block; }
+    html[lang="en"] [data-lang="ja"] { display: none; }
 
     @media (max-width: 420px) {
       .biz-bar { font-size: 12px; padding: 10px 12px; }
-      .biz-bar-en { display: none; }
-      .main { padding: 28px 14px 40px; }
-      .logo-container img { width: 120px; }
-      .tagline { font-size: 0.9rem; }
-      nav { gap: 10px; }
-      nav a { min-height: 112px; padding: 18px 10px; font-size: 13px; }
-      nav a i { font-size: 26px; }
+      .top-row { padding-top: 10px; }
+      .main { padding: 10px 14px 40px; }
+      .logo-container img { width: 124px; }
+      .site-title { font-size: 26px; }
+      .tagline { font-size: 15px; margin-bottom: 24px; }
+      .tagline small { font-size: 13px; }
+      nav { gap: 14px; }
+      nav a { padding: 12%; gap: 4px; }
+      nav a svg { width: 30px; height: 30px; }
+      nav a .t { font-size: 15px; }
+      nav a .s { font-size: 11.5px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -166,29 +281,59 @@
 <body>
   <div class="bg-slideshow" id="bgSlideshow"></div>
 
-  <!-- 法人のお客様への入口。個人のお客様の導線は従来どおり下のカードのまま -->
+  <!-- 法人のお客様への入口。個人のお客様の導線は下のタイルのまま -->
   <a class="biz-bar" href="business/index.html">
-    🏢 法人のお客様（飲食店・小売店さま）はこちら
-    <span class="biz-bar-en">/ For Business</span>
+    <span data-ja="🏢 法人のお客様（飲食店・小売店さま）はこちら" data-en="🏢 For Business (restaurants &amp; retailers)">🏢 法人のお客様（飲食店・小売店さま）はこちら</span>
     <span class="biz-arrow">→</span>
   </a>
 
+  <div class="top-row">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
   <div class="main">
     <div class="logo-container">
-      <img src="logo.jpg" alt="Sakanaya Japon">
+      <img src="logo.jpg" alt="SAKANAYA JAPON">
     </div>
 
-    <div class="tagline">A Taste of the Sea, For Every Cambodian Home<br>海のある日常を、カンボジアの食卓に。</div>
+    <h1 class="site-title">SAKANAYA JAPON</h1>
+
+    <p class="tagline" data-lang="ja">海のある日常を、カンボジアの食卓に。<small>A Taste of the Sea, For Every Cambodian Home</small></p>
+    <p class="tagline" data-lang="en">A Taste of the Sea, For Every Cambodian Home<small>Fresh seafood from Japan, in Phnom Penh</small></p>
 
     <nav>
-      <a href="menu.html"><i class="fa-solid fa-utensils"></i> MENU</a>
-      <a href="howto.html"><i class="fa-solid fa-circle-play"></i> HOW TO ORDER FOR LINE USER</a>
-      <a href="q&amp;a.html"><i class="fa-solid fa-circle-question"></i> Q&amp;A</a>
-      <a href="aboutus.html"><i class="fa-solid fa-house-chimney"></i> ABOUT US</a>
-      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="telegram" target="_blank"><i class="fa-brands fa-telegram"></i> Order by Telegram</a>
-
-      <a href="https://www.facebook.com/fishstorejapan" class="facebook-like" target="_blank" rel="noopener noreferrer">
-        Please like on Facebook <i class="fa-solid fa-thumbs-up thumb"></i>
+      <a href="menu.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        <span class="t" data-ja="メニュー" data-en="Menu">メニュー</span>
+        <span class="s" data-ja="MENU" data-en="Today's seafood &amp; sets">MENU</span>
+      </a>
+      <a href="howto.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        <span class="t" data-ja="ご注文方法" data-en="How to order">ご注文方法</span>
+        <span class="s" data-ja="LINE でのご注文（動画）" data-en="Via LINE (video guide)">LINE でのご注文（動画）</span>
+      </a>
+      <a href="q&amp;a.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        <span class="t" data-ja="よくあるご質問" data-en="FAQ">よくあるご質問</span>
+        <span class="s" data-ja="Q&amp;A" data-en="Delivery, payment &amp; more">Q&amp;A</span>
+      </a>
+      <a href="aboutus.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        <span class="t" data-ja="店舗について" data-en="About us">店舗について</span>
+        <span class="s" data-ja="ABOUT US" data-en="Our story &amp; shop info">ABOUT US</span>
+      </a>
+      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="telegram" data-info-href="order.telegramHome">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        <span class="t" data-ja="Telegram で注文" data-en="Order by Telegram">Telegram で注文</span>
+        <span class="s" data-ja="ORDER BY TELEGRAM" data-en="Chat with us directly">ORDER BY TELEGRAM</span>
+      </a>
+      <a href="https://www.facebook.com/fishstorejapan" class="facebook-like" data-info-href="social.facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+        <span class="t" data-ja="Facebook" data-en="Facebook">Facebook</span>
+        <span class="s" data-ja="いいね！をお願いします" data-en="Please like our page">いいね！をお願いします</span>
       </a>
     </nav>
   </div>
