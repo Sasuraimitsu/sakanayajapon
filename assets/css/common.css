@@ -1,6 +1,7 @@
 /* ==========================================================================
    common.css — 全ページ共通のトークン・レイアウト・部品
-   Phase 1 で追加。既存ページ（menu / howto / q&a / aboutus）は Phase 2 で移行する。
+   Phase 1 で追加。Phase 2 で既存4ページ（menu / howto / q&a / aboutus）も移行済み。
+   ヘッダー・フッターの見た目はトップページ（index.html）に合わせてある。
    ========================================================================== */
 
 :root {
@@ -19,6 +20,9 @@
   --retail: #0088cc;
   --business: #12324f;
 
+  /* ロゴの波の紺。ヘッダーの言語切替などアクセントに使う */
+  --navy-logo: #2b4c8c;
+
   /* 余白・角丸・影 */
   --gap: 16px;
   --radius: 14px;
@@ -26,15 +30,22 @@
   --shadow: 0 4px 16px rgba(10, 26, 43, 0.08);
   --shadow-lg: 0 10px 32px rgba(10, 26, 43, 0.14);
 
-  --maxw: 960px;
+  --maxw: 960px;       /* 本文の幅 */
+  --maxw-wide: 1100px; /* ヘッダー・フッターの幅（トップページと同じ） */
+  --header-h: 60px;
 }
 
 * { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* 縦に flex を敷き、フッターに margin-top:auto を効かせている。
+   内容が短いページでもフッターが画面下端まで下がり、背景が中途半端に余らない。 */
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.75;
@@ -46,21 +57,24 @@ img { max-width: 100%; height: auto; }
 
 a { color: var(--blue-dark); }
 
-/* ── ヘッダー ───────────────────────────────────────── */
+/* ── ヘッダー ───────────────────────────────────────
+   白帯・高さ60px・丸ロゴ。トップページ（index.html）の <style> と同じ値。
+   片方だけ変えると全ページの見た目がずれるので、必ず両方を直すこと。 */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
+  height: var(--header-h);
+  background: #fff;
+  color: var(--navy);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .header-inner {
-  max-width: var(--maxw);
+  max-width: var(--maxw-wide);
+  height: 100%;
   margin: 0 auto;
-  padding: 10px 16px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,17 +86,23 @@ a { color: var(--blue-dark); }
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--navy-deep);
+  color: var(--navy);
   min-width: 0;
 }
 
-.brand img { width: 38px; height: 38px; border-radius: 8px; flex: 0 0 auto; }
+.brand img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
 
 .brand-name {
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 19px;
   letter-spacing: 0.04em;
-  line-height: 1.3;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
@@ -94,12 +114,36 @@ a { color: var(--blue-dark); }
   letter-spacing: 0.12em;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+/* 法人向けページへの導線 */
+.biz-link {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13.5px;
+  white-space: nowrap;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.biz-link:hover { background: #eef3fa; border-color: rgba(43, 76, 140, 0.3); }
+.biz-link:focus-visible { outline: 2px solid var(--navy-logo); outline-offset: 2px; }
+
 /* ── 言語切替 ───────────────────────────────────────── */
 .lang-toggle {
   display: flex;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(43, 76, 140, 0.3);
   border-radius: 999px;
   overflow: hidden;
+  background: #fff;
   flex: 0 0 auto;
 }
 
@@ -108,21 +152,21 @@ a { color: var(--blue-dark); }
   border: 0;
   background: none;
   font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--navy-logo);
+  padding: 6px 13px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .lang-toggle button[aria-pressed="true"] {
-  background: var(--blue);
+  background: var(--navy-logo);
   color: #fff;
 }
 
 .lang-toggle button:focus-visible {
-  outline: 2px solid var(--blue-dark);
+  outline: 2px solid var(--navy-logo);
   outline-offset: -2px;
 }
 
@@ -206,13 +250,18 @@ p:last-child { margin-bottom: 0; }
 
 /* ── フッター ───────────────────────────────────────── */
 .site-footer {
+  margin-top: auto;
   background: var(--navy-deep);
   color: #c9d6e2;
   padding: 28px 16px 34px;
   font-size: 13px;
 }
 
-.footer-inner { max-width: var(--maxw); margin: 0 auto; }
+.footer-inner { max-width: var(--maxw-wide); margin: 0 auto; }
+
+/* 右下に追従する注文ボタンがあるページ用。
+   フッターのリンクがボタンの下に隠れないよう、下側に逃げを作る。 */
+.site-footer.has-float { padding-bottom: 110px; }
 
 .footer-links {
   display: flex;
@@ -239,11 +288,21 @@ html[lang="en"] [data-lang="en"] { display: block; }
 html[lang="en"] [data-lang="ja"] { display: none; }
 
 /* ── レスポンシブ ───────────────────────────────────── */
+@media (max-width: 560px) {
+  .brand-name { font-size: 16px; }
+  .biz-link { font-size: 12px; padding: 6px 9px; }
+  .lang-toggle button { padding: 5px 10px; font-size: 12px; }
+  .header-right { gap: 8px; }
+}
+
+@media (max-width: 380px) {
+  .biz-link { display: none; }  /* 極小画面ではヘッダーに入らないため非表示 */
+}
+
 @media (max-width: 480px) {
   h1 { font-size: 22px; }
   .wrap { padding-block: 24px 44px; }
   .card { padding: 18px 16px; }
-  .brand-name { font-size: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

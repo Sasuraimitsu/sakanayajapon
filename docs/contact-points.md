@@ -189,4 +189,4 @@ HTML に元の文字列を残しておけば、**JS が読み込めなかった�
 | 追跡パラメータ `?mibextid=ZbWKwL` の除去 | ✅ 完了 |
 | `-air` の法人窓口を `@sakanayaorder` に差し替え | ✅ 完了 |
 | LINE ID・LINE公式アカウント | 変更なし（現状維持で確定） |
-| `assets/js/site-info.js` による単一情報源化 | ⬜ Phase 2 |
+| `assets/js/site-info.js` による単一情報源化 | 🔶 進行中（4ページが読み込み済み。営業時間・窓口URLの `data-info` 化はこれから） |

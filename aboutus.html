@@ -3,53 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABOUT US - Multilingual</title>
+  <title>店舗について｜SAKANAYA JAPON</title>
+  <link rel="icon" href="logo.jpg">
+  <meta name="description" content="SAKANAYA JAPON の想い・サービス内容・会社情報。カンボジア・プノンペンで、日本の鮮度管理による鮮魚と刺身をお届けしています。">
+
+  <!-- ヘッダー・フッター・言語切替は common.css / common.js が担当する。
+       ページ固有の見た目だけを下の <style> に書くこと（common.css より後ろなので上書きできる）。 -->
+  <link rel="stylesheet" href="assets/css/common.css">
+  <script src="assets/js/site-info.js" defer></script>
+  <script src="assets/js/common.js" defer></script>
+
   <style>
-    /* 4. スマホ・タブレット向けの調整 */
-    @media (max-width: 768px) {
-      body { margin: 10px; padding-top: 70px; } /* 余白を狭くして画面を広く使う */
-      
-      h1 { font-size: 1.4rem; line-height: 1.4; } /* 見出しを少し小さく、読みやすく */
-      
-      .cta-button, .btn-order { 
-        width: 100%; /* ボタンを横幅いっぱいに（親指で押しやすくなる） */
-        box-sizing: border-box;
-      }
-      
-      nav { padding: 10px 15px; }
-      nav a { font-size: 13px; margin-left: 10px; } /* メニューがはみ出さないよう調整 */
+    .about-wrap { max-width: 800px; margin: 0 auto; padding: 32px 20px 56px; }
+
+    .about-wrap h1,
+    .about-wrap h2 { color: var(--blue); border-bottom: 0; }
+    .about-wrap h1 { text-align: center; }
+    .about-wrap h2 { font-size: 22px; margin-top: 32px; }
+
+    .about-wrap p,
+    .about-wrap ul { margin-bottom: 1em; }
+    .about-wrap ul { padding-left: 20px; }
+
+    /* セクション末尾のボタンエリア */
+    .cta-container {
+      text-align: center;
+      margin: 40px 0;
+      padding: 30px;
+      background: #f0f7ff;   /* 薄い青の背景を敷いて目立たせる */
+      border-radius: 12px;
     }
-    /* ナビゲーションの見た目（追加分） */
-    nav { 
-      position: fixed; top: 0; left: 0; width: 100%; 
-      background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      z-index: 1000; display: flex; justify-content: space-between; 
-      align-items: center; padding: 10px 20px; box-sizing: border-box; 
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--blue);
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.4;
+      transition: background-color 0.3s ease;
+      min-width: 280px;      /* ボタンが小さくなりすぎないように */
     }
-    nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
-    /* メニューが被らないようにbodyの余白を調整 */
-    body { padding-top: 60px; }
-    body { font-family: sans-serif; line-height: 1.8; margin: 20px; color: #333; }
-    h1, h2 { color: #007BFF; }
-    h1 { text-align: center; }
-    p, ul { margin-bottom: 1em; }
-    strong { font-weight: bold; }
-    ul { padding-left: 20px; }
-    .lang-toggle { text-align: center; margin-bottom: 20px; }
-    .lang-toggle button { margin: 0 10px; padding: 8px 16px; font-size: 14px; }
-    /* 画面右下に浮くボタンの見た目 */
-    /* 2つのボタンを包むコンテナ */
+
+    .cta-button:hover { background-color: var(--blue-dark); }
+
+    /* ボタン内の2行目（注意書き） */
+    .cta-note {
+      display: block;
+      font-size: 13px;
+      font-weight: normal;
+      margin-top: 4px;
+      opacity: 0.9;          /* 少し薄くして情報の優先度を下げる */
+    }
+
+    /* ── 画面右下に追従する注文ボタン（4ページ共通） ── */
     .floating-container {
       position: fixed;
       bottom: 20px;
       right: 20px;
       display: flex;
-      flex-direction: column; /* 縦に並べる（スマホで押しやすい） */
-      gap: 10px; /* ボタン同士の間隔 */
+      flex-direction: column;  /* 縦に並べる（スマホで押しやすい） */
+      gap: 10px;
       z-index: 9999;
     }
 
-    /* 各ボタンの共通スタイル */
     .float-btn {
       display: flex;
       align-items: center;
@@ -57,113 +77,49 @@
       padding: 10px 18px;
       border-radius: 50px;
       text-decoration: none;
-      color: white;
+      color: #fff;
       font-weight: bold;
       font-size: 13px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
       min-width: 160px;
     }
 
-    .float-btn:active {
-      transform: scale(0.95);
-    }
+    .float-btn:active { transform: scale(0.95); }
+    .float-btn span { margin-right: 8px; }
 
-    /* LINEボタン（緑） */
-    .btn-line {
-      background-color: #00b900;
-    }
-
-    /* Telegramボタン（青） */
-    .btn-tele {
-      background-color: #0088cc;
-    }
-
-    /* Facebook Messengerボタン */
-    .btn-fb {
-      background-color: #0084ff;
-    }
-
-    /* アイコンの余白 */
-    .float-btn i, .float-btn span {
-      margin-right: 8px;
-    }
+    .btn-line { background-color: #00b900; }
+    .btn-tele { background-color: #0088cc; }
+    .btn-fb   { background-color: #0084ff; }
 
     @media (max-width: 768px) {
-      .float-btn {
-        padding: 8px 15px;
-        font-size: 12px;
-        min-width: 140px;
-      }
-    }
-    /* セクション末尾のボタンエリア */
-    .cta-container {
-      text-align: center;
-      margin: 40px 0;
-      padding: 30px;
-      background: #f0f7ff; /* 薄い青色で背景を敷いて目立たせる */
-      border-radius: 12px;
-    }
-    .cta-button {
-      display: inline-block;
-      background-color: #007BFF;
-      color: #fff;
-      padding: 16px 32px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-    .cta-button:hover {
-      background-color: #0056b3;
-    }
-    /* ボタンのスタイルを調整 */
-    .cta-button {
-      display: inline-block;
-      background-color: #007BFF;
-      color: #fff;
-      padding: 12px 24px; /* 上下を少し詰め、横を広げる */
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 18px; /* メインの文字サイズ */
-      line-height: 1.4; /* 行間を適切に空ける */
-      transition: 0.3s;
-      min-width: 280px; /* ボタンが小さくなりすぎないように */
-    }
-
-    /* ボタン内の2行目（注意書き）用のスタイル */
-    .cta-note {
-      display: block; /* 改行させる */
-      font-size: 13px; /* 少し小さくする */
-      font-weight: normal; /* 細くする */
-      margin-top: 4px; /* 上の文字との間隔 */
-      opacity: 0.9; /* 少しだけ色を薄くして情報の優先度を下げる */
+      .about-wrap h1 { font-size: 1.4rem; line-height: 1.4; }
+      .cta-button { width: 100%; min-width: 0; }
+      .float-btn { padding: 8px 15px; font-size: 12px; min-width: 140px; }
     }
   </style>
-  <script>
-    function switchLang(lang) {
-      // コンテンツの切り替え
-      document.getElementById('content-ja').style.display = lang === 'ja' ? '' : 'none';
-      document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
-    }
-  </script>
 </head>
 <body>
-  <nav>
-    <a href="index.html" style="color: #007BFF;">SAKANAYA JAPON</a>
-    <div>
-      <a href="index.html">TOP</a>
-      <a href="https://miniapp.line.me/2006469733-lgZj9vJ4">ORDER</a>
-    </div>
-  </nav>
-  <div class="lang-toggle">
-    <button onclick="switchLang('ja')">日本語</button>
-    <button onclick="switchLang('en')">English</button>
-  </div>
 
-  <div id="content-ja">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="logo.jpg" alt="">
+      <span class="brand-name">SAKANAYA JAPON</span>
+    </a>
+    <div class="header-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="biz-link" href="business/index.html"
+         data-ja="法人のお客様（飲食店・小売店）" data-en="For Business (restaurants &amp; retailers)">法人のお客様（飲食店・小売店）</a>
+    </div>
+  </div>
+</header>
+
+<main class="about-wrap">
+<div id="content-ja" data-lang="ja">
 　 <h1>🐟 私たちの想い — 「海のある日常を、カンボジアの食卓に。」</h1>
   <p>日本では、魚は食卓の中心にある存在でした。お母さんが朝早く市場で選んだ魚、家族みんなで囲む夕食の刺身、週末の手巻き寿司パーティー。そんなふうに、「魚」はただの食材ではなく、家族や友人と過ごす温かい時間の象徴でした。</p>
   <p>でも、カンボジアに来てから、そんな「当たり前」が簡単ではなくなりました。</p>
@@ -231,7 +187,7 @@
   </ul>
   </div>
 
-  <div id="content-en" style="display: none;">
+  <div id="content-en" data-lang="en">
     <h1>🐟 Our Vision — “A Taste of the Sea, For Every Cambodian Home”</h1>
     <p>In Japan, fish is a familiar presence at every meal. From early-morning market runs to family dinners with sashimi and weekend sushi parties, seafood is more than food—it’s a way to share warmth and connection.</p>
     <p>In Cambodia, where river fish are more common and sea fish are rare, that familiarity is harder to find. Many people feel a longing for the sea.</p>
@@ -272,18 +228,35 @@
       <li>Fair trade with local fishermen and support for sustainable fisheries</li>
     </ul>
   </div>
-  <div class="floating-container">
-    <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank">
-      <i class="fa-brands fa-telegram"></i> Order by Telegram
-    </a>
-    
-    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank">
-      <span>📲</span> Order by LINE
-    </a>
+</main>
 
-    <a href="https://www.facebook.com/fishstorejapan" class="float-btn btn-fb" target="_blank">
-      <span>💬</span> Order by Facebook
-    </a>
+<footer class="site-footer has-float">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      <li><a href="index.html" data-ja="トップ" data-en="Top">トップ</a></li>
+      <li><a href="menu.html" data-ja="メニュー" data-en="Menu">メニュー</a></li>
+      <li><a href="howto.html" data-ja="ご注文方法" data-en="How to Order">ご注文方法</a></li>
+      <li><a href="q&amp;a.html" data-ja="よくあるご質問" data-en="FAQ">よくあるご質問</a></li>
+      <li><a href="aboutus.html" data-ja="店舗について" data-en="About Us">店舗について</a></li>
+      <li><a href="business/index.html" data-ja="法人のお客様" data-en="For Business">法人のお客様</a></li>
+    </ul>
+    <p class="footer-note">
+      SAKANAYA JAPON ／ #72BE0, Street 174, Khan Daun Penh, Phnom Penh, Cambodia
+    </p>
   </div>
+</footer>
+
+<div class="floating-container">
+  <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank" rel="noopener noreferrer">
+    <span>✈</span> Order by Telegram
+  </a>
+  <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank" rel="noopener noreferrer">
+    <span>📲</span> Order by LINE
+  </a>
+  <a href="https://www.facebook.com/fishstorejapan" class="float-btn btn-fb" target="_blank" rel="noopener noreferrer">
+    <span>💬</span> Order by Facebook
+  </a>
+</div>
+
 </body>
 </html>

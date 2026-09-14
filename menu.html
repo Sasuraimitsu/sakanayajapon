@@ -3,38 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MENU - SAKANAYA JAPON</title>
-  <style>
-    /* 1. ナビゲーションバー (共通) */
-    nav { 
-      position: fixed; top: 0; left: 0; width: 100%; 
-      background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      z-index: 1000; display: flex; justify-content: space-between; 
-      align-items: center; padding: 10px 20px; box-sizing: border-box; 
-    }
-    nav a { text-decoration: none; color: #333; font-weight: bold; margin-left: 15px; }
-    .nav-logo { color: #007BFF !important; }
+  <title>メニュー｜SAKANAYA JAPON</title>
+  <link rel="icon" href="logo.jpg">
+  <meta name="description" content="SAKANAYA JAPON のメニュー。刺身・鮮魚・おまかせセット・お惣菜をご用意しています。">
 
-    /* 2. 全体レイアウト */
-    body { 
-      font-family: sans-serif; 
-      margin: 0; 
-      padding-top: 70px; /* ナビの高さ分 */
-      background-color: #f5f5f5; 
+  <!-- ヘッダー・フッター・言語切替は common.css / common.js が担当する。
+       ページ固有の見た目だけを下の <style> に書くこと（common.css より後ろなので上書きできる）。 -->
+  <link rel="stylesheet" href="assets/css/common.css">
+  <script src="assets/js/site-info.js" defer></script>
+  <script src="assets/js/common.js" defer></script>
+
+  <style>
+    .menu-container {
+      max-width: 900px;      /* メニュー画像が見やすい幅に制限 */
+      margin: 0 auto;
+      background: var(--surface);
+      padding-bottom: 40px;
       text-align: center;
     }
 
-    .menu-container {
-      max-width: 900px; /* メニューが見やすい幅に制限 */
-      margin: 0 auto;
-      background: #fff;
-      padding-bottom: 40px;
-    }
-
-    h1 {
+    .menu-container h1 {
       padding: 20px;
       font-size: 1.5em;
-      color: #007BFF;
+      color: var(--blue);
       margin: 0;
     }
 
@@ -42,22 +33,27 @@
       display: block;
       width: 100%;
       height: auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* 3. 共通フローティングボタン */
-    /* 2つのボタンを包むコンテナ */
+    .menu-note {
+      padding: 20px;
+      font-size: 0.9em;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── 画面右下に追従する注文ボタン（4ページ共通） ── */
     .floating-container {
       position: fixed;
       bottom: 20px;
       right: 20px;
       display: flex;
-      flex-direction: column; /* 縦に並べる（スマホで押しやすい） */
-      gap: 10px; /* ボタン同士の間隔 */
+      flex-direction: column;  /* 縦に並べる（スマホで押しやすい） */
+      gap: 10px;
       z-index: 9999;
     }
 
-    /* 各ボタンの共通スタイル */
     .float-btn {
       display: flex;
       align-items: center;
@@ -65,69 +61,80 @@
       padding: 10px 18px;
       border-radius: 50px;
       text-decoration: none;
-      color: white;
+      color: #fff;
       font-weight: bold;
       font-size: 13px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
       min-width: 160px;
     }
 
-    .float-btn:active {
-      transform: scale(0.95);
-    }
+    .float-btn:active { transform: scale(0.95); }
+    .float-btn span { margin-right: 8px; }
 
-    /* LINEボタン（緑） */
-    .btn-line {
-      background-color: #00b900;
-    }
-
-    /* Telegramボタン（青） */
-    .btn-tele {
-      background-color: #0088cc;
-    }
-
-    /* アイコンの余白 */
-    .float-btn i, .float-btn span {
-      margin-right: 8px;
-    }
+    .btn-line { background-color: #00b900; }
+    .btn-tele { background-color: #0088cc; }
 
     @media (max-width: 768px) {
-      .float-btn {
-        padding: 8px 15px;
-        font-size: 12px;
-        min-width: 140px;
-      }
+      .float-btn { padding: 8px 15px; font-size: 12px; min-width: 140px; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">SAKANAYA JAPON</a>
-  <div>
-    <a href="index.html">TOP</a>
-    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4">ORDER</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="logo.jpg" alt="">
+      <span class="brand-name">SAKANAYA JAPON</span>
+    </a>
+    <div class="header-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="biz-link" href="business/index.html"
+         data-ja="法人のお客様（飲食店・小売店）" data-en="For Business (restaurants &amp; retailers)">法人のお客様（飲食店・小売店）</a>
+    </div>
   </div>
-</nav>
+</header>
 
-<div class="menu-container">
-  <h1>MENU</h1>
-  
+<main class="menu-container">
+  <h1 data-ja="メニュー" data-en="Menu">メニュー</h1>
+
   <img class="responsive-img" src="english-menu20260207.jpg" alt="SAKANAYA JAPON MENU">
-  
-  <p style="padding: 20px; font-size: 0.9em; color: #666;">
+
+  <p class="menu-note"
+     data-ja="※画像が拡大できない場合は、長押しして保存するか、LINE注文画面からご確認ください。"
+     data-en="If you cannot zoom in, please long-press to save the image, or check the menu in the LINE order screen.">
     ※画像が拡大できない場合は、長押しして保存するか、LINE注文画面からご確認ください。
   </p>
-</div>
-<div class="floating-container">
-    <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank">
-      <i class="fa-brands fa-telegram"></i> Order by Telegram
-    </a>
-    
-    <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank">
-      <span>📲</span> Order by LINE
-    </a>
+</main>
+
+<footer class="site-footer has-float">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      <li><a href="index.html" data-ja="トップ" data-en="Top">トップ</a></li>
+      <li><a href="menu.html" data-ja="メニュー" data-en="Menu">メニュー</a></li>
+      <li><a href="howto.html" data-ja="ご注文方法" data-en="How to Order">ご注文方法</a></li>
+      <li><a href="q&amp;a.html" data-ja="よくあるご質問" data-en="FAQ">よくあるご質問</a></li>
+      <li><a href="aboutus.html" data-ja="店舗について" data-en="About Us">店舗について</a></li>
+      <li><a href="business/index.html" data-ja="法人のお客様" data-en="For Business">法人のお客様</a></li>
+    </ul>
+    <p class="footer-note">
+      SAKANAYA JAPON ／ #72BE0, Street 174, Khan Daun Penh, Phnom Penh, Cambodia
+    </p>
   </div>
+</footer>
+
+<div class="floating-container">
+  <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="float-btn btn-tele" target="_blank" rel="noopener noreferrer">
+    <span>✈</span> Order by Telegram
+  </a>
+  <a href="https://miniapp.line.me/2006469733-lgZj9vJ4" class="float-btn btn-line" target="_blank" rel="noopener noreferrer">
+    <span>📲</span> Order by LINE
+  </a>
+</div>
+
 </body>
 </html>
