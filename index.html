@@ -30,7 +30,7 @@
       --navy: #2b4c8c;
       --navy-deep: #12324f;
       --ink: #1c2430;
-      --tile: rgba(255, 255, 255, 0.90);
+      --tile: rgba(255, 255, 255, 0.70);   /* タイルの白。下げるほど背景が透ける */
     }
 
     /* 1. 全体：魚の写真を全面に敷き、白で透かす */
@@ -146,41 +146,43 @@
     }
 
     .site-title {
-      font-size: 34px;
-      letter-spacing: 0.12em;
+      font-size: 44px;
+      letter-spacing: 0.10em;
+      line-height: 1.2;
       color: var(--navy-deep);
-      margin: 14px 0 4px;
+      margin: 16px 0 8px;
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
     .tagline {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       color: var(--navy);
-      line-height: 1.8;
-      margin: 0 0 32px;
+      line-height: 1.7;
+      margin: 0 0 36px;
       letter-spacing: 0.04em;
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     .tagline small {
       display: block;
-      font-size: 15px;
+      margin-top: 4px;
+      font-size: 16px;
       font-weight: normal;
       color: var(--ink);
       opacity: 0.85;
     }
 
-    /* 6. 丸いカテゴリータイル：スマホ2列、タブレット以上3列
+    /* 6. 丸いカテゴリータイル：常に2列×2行
        輪はロゴのロープを模した二重線（ゴールド） */
-    nav {
+    nav, .pills {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      max-width: 780px;
+      max-width: 600px;
       margin: 0 auto;
     }
     @media (min-width: 720px) {
-      nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+      nav, .pills { gap: 26px; }
     }
 
     nav a {
@@ -245,18 +247,53 @@
     }
     nav a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 
-    /* Telegram / Facebook は各サービスの色。ロゴ透かしは付けない */
-    nav a.telegram, nav a.facebook-like {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.85);
-    }
-    nav a.telegram { background: #0088cc; box-shadow: inset 0 0 0 4px #0088cc, inset 0 0 0 6px rgba(255,255,255,.45), 0 8px 22px rgba(10,26,43,.14); }
-    nav a.facebook-like { background: #1877f2; box-shadow: inset 0 0 0 4px #1877f2, inset 0 0 0 6px rgba(255,255,255,.45), 0 8px 22px rgba(10,26,43,.14); }
-    nav a.telegram::before, nav a.facebook-like::before { display: none; }
-    nav a.telegram:hover { background: #0071ab; box-shadow: inset 0 0 0 4px #0071ab, inset 0 0 0 6px rgba(255,255,255,.45), 0 14px 30px rgba(10,26,43,.22); }
-    nav a.facebook-like:hover { background: #1462c9; box-shadow: inset 0 0 0 4px #1462c9, inset 0 0 0 6px rgba(255,255,255,.45), 0 14px 30px rgba(10,26,43,.22); }
+    /* 7. 下段のピル（左 Telegram / 右 Facebook）：アイコン＋文字。輪はタイルと同じゴールド */
+    .pills { margin-top: 18px; }
+    @media (min-width: 720px) { .pills { margin-top: 26px; } }
 
-    /* 7. 言語別ブロック（common.js が html[lang] を切り替える。JS無効時は日本語） */
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 60px;
+      padding: 8px 16px 8px 8px;
+      border-radius: 999px;
+      background: var(--tile);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 3px solid var(--gold);
+      box-shadow:
+        inset 0 0 0 3px #fff,
+        inset 0 0 0 5px var(--gold-soft),
+        0 8px 22px rgba(10, 26, 43, 0.14);
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 1.25;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+    .pill .ic {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .pill .ic svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pill.telegram .ic { background: #0088cc; }
+    .pill.facebook-like .ic { background: #1877f2; }
+    .pill:hover { transform: translateY(-3px); color: #fff; box-shadow: inset 0 0 0 3px transparent, inset 0 0 0 5px rgba(255,255,255,.45), 0 14px 30px rgba(10, 26, 43, 0.22); }
+    .pill.telegram:hover { background: #0088cc; border-color: #0088cc; }
+    .pill.facebook-like:hover { background: #1877f2; border-color: #1877f2; }
+    .pill:hover .ic { background: rgba(255, 255, 255, 0.22); }
+    .pill:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+    /* 8. 言語別ブロック（common.js が html[lang] を切り替える。JS無効時は日本語） */
     [data-lang] { display: none; }
     [data-lang="ja"] { display: block; }
     html[lang="ja"] [data-lang="ja"] { display: block; }
@@ -269,10 +306,14 @@
       .top-row { padding-top: 10px; }
       .main { padding: 10px 14px 40px; }
       .logo-container img { width: 124px; height: 124px; }
-      .site-title { font-size: 26px; }
-      .tagline { font-size: 15px; margin-bottom: 24px; }
-      .tagline small { font-size: 13px; }
-      nav { gap: 14px; }
+      .site-title { font-size: 30px; }
+      .tagline { font-size: 17px; margin-bottom: 26px; }
+      .tagline small { font-size: 14px; }
+      nav, .pills { gap: 14px; }
+      .pills { margin-top: 14px; }
+      .pill { min-height: 56px; font-size: 13px; padding: 6px 12px 6px 6px; gap: 9px; }
+      .pill .ic { width: 36px; height: 36px; }
+      .pill .ic svg { width: 20px; height: 20px; }
       nav a { padding: 12%; gap: 4px; }
       nav a svg { width: 30px; height: 30px; }
       nav a .t { font-size: 15px; }
@@ -331,17 +372,18 @@
         <span class="t" data-ja="店舗について" data-en="About us">店舗について</span>
         <span class="s" data-ja="ABOUT US" data-en="Our story &amp; shop info">ABOUT US</span>
       </a>
-      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="telegram" data-info-href="order.telegramHome">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        <span class="t" data-ja="Telegram で注文" data-en="Order by Telegram">Telegram で注文</span>
-        <span class="s" data-ja="ORDER BY TELEGRAM" data-en="Chat with us directly">ORDER BY TELEGRAM</span>
-      </a>
-      <a href="https://www.facebook.com/fishstorejapan" class="facebook-like" data-info-href="social.facebook">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
-        <span class="t" data-ja="Facebook" data-en="Facebook">Facebook</span>
-        <span class="s" data-ja="いいね！をお願いします" data-en="Please like our page">いいね！をお願いします</span>
-      </a>
     </nav>
+
+    <div class="pills">
+      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="pill telegram" data-info-href="order.telegramHome">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></span>
+        <span data-ja="Telegram でチャット" data-en="Chat with us directly">Telegram でチャット</span>
+      </a>
+      <a href="https://www.facebook.com/fishstorejapan" class="pill facebook-like" data-info-href="social.facebook">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></span>
+        <span data-ja="Facebook でいいね！" data-en="Please like our page">Facebook でいいね！</span>
+      </a>
+    </div>
   </div>
 
   <script>
