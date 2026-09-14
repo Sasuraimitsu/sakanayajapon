@@ -39,28 +39,32 @@
 
 ---
 
-## 2. 注文・問い合わせ窓口の一覧（実測 8系統）
+## 2. 注文・問い合わせ窓口の一覧（実測 8系統 → 整理後 7系統）
 
 | # | 窓口 | URL / ID | 掲載場所 | 想定用途 |
 |---|---|---|---|---|
 | 1 | Telegram グループ（個人向け） | `t.me/+UZAm7-eLzD0yZTA1` | index, menu, howto, aboutus, q&a | 個人注文 |
-| 2 | Telegram グループ（法人向け） | `t.me/+9MZ3SB5xav42YjZl` | `-air`（旧試作） | 法人注文 |
+| 2 | ~~Telegram グループ（法人向け）~~ | ~~`t.me/+9MZ3SB5xav42YjZl`~~ | — | **廃止済**。後継は #9 |
 | 3 | Telegram チャンネル | `t.me/fishstoreJapon` | aboutus, q&a | 情報発信？ |
 | 4 | Telegram 公式 | `t.me/SAKANAYAJAPON` | 現行カタログ | 法人問い合わせ |
 | 5 | Telegram Bot | `t.me/sakanaya_bot` | 現行カタログ / `-air` | 注文受付ボット |
 | 6 | LINE Mini App | `miniapp.line.me/2006469733-lgZj9vJ4` | menu, howto, aboutus, q&a | 個人注文 |
 | 7 | LINE 公式アカウント | `line.me/R/ti/p/@sakanayajapan` | q&a のみ | 個人問い合わせ |
-| 8 | Facebook | `facebook.com/share/15UgiCCdu4/` と `facebook.com/fishstorejapan?mibextid=ZbWKwL` | index/aboutus と q&a で**別URL** | SNS |
+| 8 | Facebook | `facebook.com/fishstorejapan` | 全ページ（**2026-09-14 に統一済**） | SNS |
+| 9 | Telegram（法人向け・現行） | `t.me/sakanayaorder` | `-air` | 法人の注文・問い合わせ |
 
 ### 問題点
 
-- **Telegram だけで5系統**あります。お客様は「どれに送ればいいのか」を判断できません。
-- **Facebook が2つの異なるURLで掲載**されています（`share/15UgiCCdu4` と `fishstorejapan`）。
-  同一ページを指しているのか別ページなのか、URLからは判別できません。
-- **表記ゆれ**: LINE ID は `@sakanayajapan`（**japan**）、Telegram は `fishstoreJapon`（**Japon**）。
-  ブランド表記が `JAPON` である以上、LINE 側は意図的か確認が必要です。
-- `-air`（旧試作）に載っている法人向けグループ #2 が、現行カタログには出てきません。
-  現在も使われているのか、#4 に統合されたのか確定が必要です。
+- ~~**Facebook が2つの異なるURLで掲載**~~ → **2026-09-14 解決**。
+  `facebook.com/fishstorejapan` に全8箇所を統一し、追跡パラメータ `?mibextid=ZbWKwL` も除去しました。
+- ~~**法人向けグループ #2 の扱いが不明**~~ → **廃止済みと確定**。現行の法人窓口は `@sakanayaorder`（#9）。
+  `-air` の案内2箇所を差し替え済みです。
+- ~~**LINE ID の表記ゆれ**~~ → **現状維持で確定**。
+  LINE 側は `@sakanayajapan`（japan）で登録済みのため、変更すると友だち追加リンクが切れます。
+  ブランド表記 `JAPON` との不一致は許容します。
+- **Telegram が依然として4系統**あります（#1 個人グループ / #3 チャンネル / #5 Bot / #9 法人）。
+  役割は分かれていますが、お客様から見た使い分けの説明がページ上にありません。
+  Phase 1 で個人/法人の導線を分ける際に、それぞれ1つだけ見せる形にするのが望ましいです。
 
 ### 統一案
 
@@ -68,12 +72,12 @@
 
 | 導線 | 主窓口（ボタンで大きく出す） | 副窓口（フッターに小さく） |
 |---|---|---|
-| 個人（For Home） | LINE Mini App #6 | Telegram グループ #1 |
-| 法人（For Business） | Telegram Bot #5（カタログ経由） | Telegram 公式 #4 |
-| SNS | Facebook（**どちらか1つに確定**） | Telegram チャンネル #3 |
+| 個人（For Home） | LINE Mini App #6 | Telegram グループ #1 / LINE公式 #7 |
+| 法人（For Business） | Telegram Bot #5（カタログ経由） | Telegram 法人 #9 |
+| SNS | Facebook #8（`fishstorejapan`） | Telegram チャンネル #3 |
 
-廃止候補: #2（法人グループ）、#7（LINE公式：Mini App と役割が重複）
-→ 廃止ではなく残す場合も、**ページ本文からは消してフッターのみ**にするのが現実的です。
+**2026-09-14 確定**: #7（LINE公式アカウント）は**個人のお客様向けの問い合わせ窓口として残します**。
+Mini App への一本化は行いません。#2（旧法人グループ）のみ廃止です。
 
 ---
 
@@ -98,17 +102,18 @@ const SITE_INFO = {
     en: '4:30 PM (at least 2 hours before your desired delivery time)',
   },
 
-  // ── 注文窓口 ──
+  // ── 注文窓口（2026-09-14 確定） ──
   order: {
-    lineMiniApp: 'https://miniapp.line.me/2006469733-lgZj9vJ4', // 個人向け 主
-    telegramHome: 'https://t.me/+UZAm7-eLzD0yZTA1',             // 個人向け 副
-    telegramBot:  'https://t.me/sakanaya_bot',                  // 法人向け 主
-    telegramBiz:  'https://t.me/SAKANAYAJAPON',                 // 法人向け 副
+    lineMiniApp:  'https://miniapp.line.me/2006469733-lgZj9vJ4', // 個人向け 主
+    telegramHome: 'https://t.me/+UZAm7-eLzD0yZTA1',              // 個人向け 副
+    lineOfficial: 'https://line.me/R/ti/p/@sakanayajapan',       // 個人向け 問い合わせ（ID は japan のままで確定）
+    telegramBot:  'https://t.me/sakanaya_bot',                   // 法人向け 主
+    telegramBiz:  'https://t.me/sakanayaorder',                  // 法人向け 副（旧グループから移行済み）
   },
 
-  // ── SNS（★要確定：Facebook が2URL混在している） ──
+  // ── SNS（2026-09-14 確定） ──
   social: {
-    facebook: 'https://www.facebook.com/share/15UgiCCdu4/',
+    facebook: 'https://www.facebook.com/fishstorejapan',
     telegramChannel: 'https://t.me/fishstoreJapon',
   },
 
@@ -170,10 +175,18 @@ HTML に元の文字列を残しておけば、**JS が読み込めなかった�
 |---|---|---|
 | ~~1~~ | ~~正しい営業時間~~ | ✅ **確定: 毎日 10:00〜19:30（国民の休日を除く）** |
 | ~~2~~ | ~~定休日~~ | ✅ **確定: 定休日なし（国民の休日のみ休業）** |
-| 3 | Facebook の正URL | `share/15UgiCCdu4` / `fishstorejapan` / 両方別ページとして併記 |
-| 4 | LINE ID の綴り | `@sakanayajapan` のままでよいか（ブランドは JAPON） |
-| 5 | 法人向け Telegram グループ #2 | 現役 / 廃止済み |
-| 6 | LINE 公式アカウント #7 | 残す / Mini App に一本化 |
+| ~~3~~ | ~~Facebook の正URL~~ | ✅ **確定: `facebook.com/fishstorejapan`**（全8箇所を統一済み） |
+| ~~4~~ | ~~LINE ID の綴り~~ | ✅ **確定: `@sakanayajapan` のまま**（変更すると友だち追加リンクが切れるため） |
+| ~~5~~ | ~~法人向け Telegram グループ #2~~ | ✅ **確定: 廃止済み。現行は `@sakanayaorder`** |
+| ~~6~~ | ~~LINE 公式アカウント #7~~ | ✅ **確定: 個人のお客様向け問い合わせ窓口として残す** |
 
-1〜2 は確定済みです。`q&a.html` の営業時間を「毎日 10:00〜19:30」に合わせる修正が未実施のため、
-次の作業で反映します。残り 3〜6 が決まれば、窓口の整理も同時に反映できます。
+**全6項目が確定しました。** 反映状況は以下のとおりです。
+
+| 反映内容 | 状態 |
+|---|---|
+| `q&a.html` の営業時間を「毎日 10:00〜19:30」に修正（日英2箇所） | ✅ 完了 |
+| Facebook URL を `fishstorejapan` に統一（index / aboutus / q&a 計8箇所） | ✅ 完了 |
+| 追跡パラメータ `?mibextid=ZbWKwL` の除去 | ✅ 完了 |
+| `-air` の法人窓口を `@sakanayaorder` に差し替え | ✅ 完了 |
+| LINE ID・LINE公式アカウント | 変更なし（現状維持で確定） |
+| `assets/js/site-info.js` による単一情報源化 | ⬜ Phase 2 |

@@ -120,5 +120,16 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 
 ### 着手前に確定が必要な事項
 
-`docs/contact-points.md` §4 の6項目（営業時間、定休日、Facebook / LINE の正URL など）。
-ここが決まらないままページを作ると、食い違いを新しいページに複製することになります。
+~~`docs/contact-points.md` §4 の6項目~~ → **2026-09-14 に全6項目が確定し、ページへの反映も完了しました。**
+
+確定した内容（詳細は `docs/contact-points.md` §4）:
+
+| 項目 | 確定値 |
+|---|---|
+| 営業時間 | 毎日 10:00〜19:30（国民の休日を除く）。定休日なし |
+| Facebook | `facebook.com/fishstorejapan` に統一 |
+| LINE ID | `@sakanayajapan` のまま（変更すると友だち追加リンクが切れるため） |
+| LINE 公式アカウント | 個人のお客様向け問い合わせ窓口として残す |
+| 法人向け Telegram | 旧グループは廃止。現行は `@sakanayaorder` |
+
+Phase 1 に着手できる状態です。
