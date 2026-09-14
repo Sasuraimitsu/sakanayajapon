@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="SAKANAYA JAPON｜海のある日常を、カンボジアの食卓に。">
   <meta property="og:description" content="プノンペンの魚屋。日本の鮮度管理で刺身・鮮魚・お惣菜をお届け。LINE・Telegram・Facebook Messenger で注文OK。">
-  <meta property="og:image" content="https://sasuraimitsu.github.io/sakanayajapon/logo.jpg">
+  <meta property="og:image" content="https://sasuraimitsu.github.io/sakanayajapon/fish-photo.jpg">
   <meta property="og:url" content="https://sasuraimitsu.github.io/sakanayajapon/">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -20,92 +20,66 @@
   <script src="assets/js/common.js" defer></script>
 
   <style>
-    /* ── ロゴから取った配色 ──────────────────────────────
-       赤: 鯛とロープ / 紺: 波。タイルの輪・文字・ホバーに使う */
     :root {
-      --red: #d9363e;
-      --red-dark: #b8262e;
-      --gold: #cfa43b;                    /* 輪の色（ゴールド） */
-      --gold-soft: rgba(207, 164, 59, 0.45);
-      --navy: #2b4c8c;
+      --navy: #2b4c8c;        /* ロゴの波の紺。アイコンの色 */
       --navy-deep: #12324f;
       --ink: #1c2430;
-      --tile: rgba(255, 255, 255, 0.70);   /* タイルの白。下げるほど背景が透ける */
+      --tg: #2a9bd6;          /* Telegram */
+      --fb: #1877f2;          /* Facebook */
+      --header-h: 60px;
     }
 
-    /* 1. 全体：魚の写真を全面に敷き、白で透かす */
+    * { box-sizing: border-box; }
+
     body {
       font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
       margin: 0;
-      padding: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      background: #dfe7ee; /* 画像読込前のフォールバック色（薄い青灰） */
-      color: var(--ink);
+      background: #0a1a2b;    /* 写真の読み込み前に見える色 */
+      color: #fff;
     }
 
-    /* 背景スライドショー（複数写真をフェードで切り替え） */
-    .bg-slideshow { position: fixed; inset: 0; z-index: -2; }
-    .bg-slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+    /* ── 1. ヘッダー（白帯）：ロゴ＋店名 ／ 言語切替＋法人向け ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: var(--header-h);
+      background: #fff;
+      color: var(--navy-deep);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
     }
-    .bg-slide.active { opacity: 1; }
-
-    /* 2. 透かし：写真の上に白を重ねて薄く見せる。数値を下げると写真が濃くなる */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.72);
-      z-index: -1;
-    }
-
-    /* 3. 法人のお客様への入口（ページ最上部の細いバー） */
-    .biz-bar {
-      position: relative;
-      z-index: 10;
+    .header-inner {
+      max-width: 1100px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 11px 16px;
-      background: var(--navy-deep);
-      color: #eaf2f8;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 0.02em;
-      box-sizing: border-box;
-      transition: background 0.2s;
+      color: var(--navy-deep);
+      min-width: 0;
     }
-    .biz-bar:hover { background: #1a4468; }
-    .biz-bar .biz-arrow { opacity: 0.75; }
+    .brand img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+    .brand-name { font-weight: 800; font-size: 19px; letter-spacing: 0.04em; white-space: nowrap; }
 
-    /* 4. 言語切替（右上） */
-    .top-row {
-      width: 100%;
-      max-width: 1040px;
-      box-sizing: border-box;
-      padding: 12px 16px 0;
-      display: flex;
-      justify-content: flex-end;
-    }
+    .header-right { display: flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+
     .lang-toggle {
       display: flex;
-      border: 1px solid rgba(43, 76, 140, 0.35);
+      border: 1px solid rgba(43, 76, 140, 0.3);
       border-radius: 999px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: #fff;
     }
     .lang-toggle button {
       appearance: none;
@@ -115,185 +89,152 @@
       font-size: 13px;
       font-weight: bold;
       color: var(--navy);
-      padding: 7px 16px;
+      padding: 6px 13px;
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
     .lang-toggle button[aria-pressed="true"] { background: var(--navy); color: #fff; }
-    .lang-toggle button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .lang-toggle button:focus-visible { outline: 2px solid var(--navy); outline-offset: -2px; }
 
-    /* 5. 本体：箱で囲わず、画面幅いっぱいに広げる */
-    .main {
-      width: 100%;
-      max-width: 1040px;
-      margin: auto 0;              /* 縦方向の中央寄せ */
-      padding: 16px 16px 48px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    .logo-container img {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid var(--gold);
-      box-shadow:
-        0 0 0 3px #fff,
-        0 0 0 5px var(--gold-soft),
-        0 8px 22px rgba(10, 26, 43, 0.22);
-      background: #fff;
-    }
-
-    .site-title {
-      font-size: 44px;
-      letter-spacing: 0.10em;
-      line-height: 1.2;
+    .biz-link {
       color: var(--navy-deep);
-      margin: 16px 0 8px;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-    }
-
-    .tagline {
-      font-size: 22px;
+      text-decoration: none;
       font-weight: bold;
-      color: var(--navy);
-      line-height: 1.7;
-      margin: 0 0 36px;
-      letter-spacing: 0.04em;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+      font-size: 13.5px;
+      white-space: nowrap;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
     }
-    .tagline small {
-      display: block;
-      margin-top: 4px;
-      font-size: 16px;
-      font-weight: normal;
-      color: var(--ink);
-      opacity: 0.85;
-    }
+    .biz-link:hover { background: #eef3fa; border-color: rgba(43, 76, 140, 0.3); }
+    .biz-link:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-    /* 6. 丸いカテゴリータイル：常に2列×2行
-       輪はロゴのロープを模した二重線（ゴールド） */
-    nav, .pills {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    @media (min-width: 720px) {
-      nav, .pills { gap: 26px; }
-    }
-
-    nav a {
+    /* ── 2. ヒーロー：写真を全面に敷き、上下を暗くして文字を立たせる ── */
+    .hero {
       position: relative;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 14%;
-      box-sizing: border-box;
-      background: var(--tile);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 3px solid var(--gold);
-      box-shadow:
-        inset 0 0 0 4px #fff,
-        inset 0 0 0 6px var(--gold-soft),
-        0 8px 22px rgba(10, 26, 43, 0.14);
-      color: var(--navy);
-      text-decoration: none;
-      text-align: center;
+      padding: 40px 16px 44px;
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
     }
-
-    /* 輪の中に店のロゴを透かす（中央に大きく。数値を上げるほど濃くなる） */
-    nav a::before {
+    .bg-slideshow { position: absolute; inset: 0; z-index: 0; }
+    .bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .bg-slide.active { opacity: 1; }
+    /* 暗さの調整はここ。数値を上げるほど写真が暗くなる */
+    .hero::before {
       content: "";
       position: absolute;
-      inset: 6%;
-      background: url('logo.jpg') center / contain no-repeat;
-      opacity: 0.20;
-      mix-blend-mode: multiply;
-      pointer-events: none;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.30) 45%, rgba(0, 0, 0, 0.60) 100%);
+    }
+    .hero > * { position: relative; z-index: 2; }
+
+    .hero-inner { width: 100%; max-width: 900px; text-align: center; }
+
+    .site-title {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55), 0 0 24px rgba(0, 0, 0, 0.35);
+    }
+    .tagline {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0 0 40px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 0, 0, 0.35);
+    }
+    .tagline small {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 600;
+      opacity: 0.95;
     }
 
-    nav a > * { position: relative; }
-
-    nav a svg {
-      width: 38px;
-      height: 38px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.9;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    /* ── 3. メニュー：白い丸アイコン＋白文字、2列×2行 ── */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px 28px;
+      max-width: 620px;
+      margin: 0 auto 32px;
     }
-    nav a .t { font-size: 17px; font-weight: bold; line-height: 1.3; letter-spacing: 0.02em; }
-    nav a .s { font-size: 12.5px; opacity: 0.8; line-height: 1.3; }
-
-    nav a:hover {
-      background: var(--navy);
-      color: #fff;
-      transform: translateY(-4px);
-      box-shadow:
-        inset 0 0 0 4px var(--navy),
-        inset 0 0 0 6px rgba(255, 255, 255, 0.45),
-        0 14px 30px rgba(10, 26, 43, 0.22);
-    }
-    nav a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
-
-    /* 7. 下段のピル（左 Telegram / 右 Facebook）：アイコン＋文字。輪はタイルと同じゴールド */
-    .pills { margin-top: 18px; }
-    @media (min-width: 720px) { .pills { margin-top: 26px; } }
-
-    .pill {
+    .item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      min-height: 60px;
-      padding: 8px 16px 8px 8px;
-      border-radius: 999px;
-      background: var(--tile);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 3px solid var(--gold);
-      box-shadow:
-        inset 0 0 0 3px #fff,
-        inset 0 0 0 5px var(--gold-soft),
-        0 8px 22px rgba(10, 26, 43, 0.14);
-      color: var(--navy);
+      gap: 14px;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 1.25;
+      color: #fff;
       text-align: left;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+      border-radius: 999px;
+      transition: transform 0.2s;
     }
-    .pill .ic {
+    .item:hover { transform: translateY(-3px); }
+    .item:focus-visible { outline: 3px solid #fff; outline-offset: 6px; }
+    .item .circle {
       flex: 0 0 auto;
-      width: 40px;
-      height: 40px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
+      background: #fff;
+      color: var(--navy-deep);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .pill .ic svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .pill.telegram .ic { background: #0088cc; }
-    .pill.facebook-like .ic { background: #1877f2; }
-    .pill:hover { transform: translateY(-3px); color: #fff; box-shadow: inset 0 0 0 3px transparent, inset 0 0 0 5px rgba(255,255,255,.45), 0 14px 30px rgba(10, 26, 43, 0.22); }
-    .pill.telegram:hover { background: #0088cc; border-color: #0088cc; }
-    .pill.facebook-like:hover { background: #1877f2; border-color: #1877f2; }
-    .pill:hover .ic { background: rgba(255, 255, 255, 0.22); }
-    .pill:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .item:hover .circle { box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45); }
+    .item .circle svg { width: 34px; height: 34px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .item .t { display: block; font-size: 24px; font-weight: 800; line-height: 1.2; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); }
+    .item .s { display: block; font-size: 14px; font-weight: 500; margin-top: 3px; opacity: 0.95; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); }
 
-    /* 8. 言語別ブロック（common.js が html[lang] を切り替える。JS無効時は日本語） */
+    /* ── 4. 下段ピル：Telegram / Facebook ── */
+    .pills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 60px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 20px;
+      line-height: 1.2;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .pill:hover { transform: translateY(-3px); filter: brightness(1.08); }
+    .pill:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+    .pill svg { width: 28px; height: 28px; flex: 0 0 auto; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pill.telegram { background: var(--tg); }
+    .pill.facebook-like { background: var(--fb); }
+
+    /* ── 5. 言語別ブロック（common.js が html[lang] を切り替える。JS無効時は日本語） ── */
     [data-lang] { display: none; }
     [data-lang="ja"] { display: block; }
     html[lang="ja"] [data-lang="ja"] { display: block; }
@@ -301,23 +242,27 @@
     html[lang="en"] [data-lang="en"] { display: block; }
     html[lang="en"] [data-lang="ja"] { display: none; }
 
-    @media (max-width: 420px) {
-      .biz-bar { font-size: 12px; padding: 10px 12px; }
-      .top-row { padding-top: 10px; }
-      .main { padding: 10px 14px 40px; }
-      .logo-container img { width: 124px; height: 124px; }
-      .site-title { font-size: 30px; }
-      .tagline { font-size: 17px; margin-bottom: 26px; }
-      .tagline small { font-size: 14px; }
-      nav, .pills { gap: 14px; }
-      .pills { margin-top: 14px; }
-      .pill { min-height: 56px; font-size: 13px; padding: 6px 12px 6px 6px; gap: 9px; }
-      .pill .ic { width: 36px; height: 36px; }
-      .pill .ic svg { width: 20px; height: 20px; }
-      nav a { padding: 12%; gap: 4px; }
-      nav a svg { width: 30px; height: 30px; }
-      nav a .t { font-size: 15px; }
-      nav a .s { font-size: 11.5px; }
+    /* ── 6. スマホ ── */
+    @media (max-width: 560px) {
+      .brand-name { font-size: 16px; }
+      .biz-link { font-size: 12px; padding: 6px 9px; }
+      .lang-toggle button { padding: 5px 10px; font-size: 12px; }
+      .hero { padding: 28px 16px 36px; }
+      .site-title { font-size: 34px; }
+      .tagline { font-size: 18px; margin-bottom: 28px; }
+      .tagline small { font-size: 14.5px; }
+      .menu { gap: 18px 12px; margin-bottom: 26px; }
+      .item { flex-direction: column; text-align: center; gap: 10px; }
+      .item .circle { width: 60px; height: 60px; }
+      .item .circle svg { width: 30px; height: 30px; }
+      .item .t { font-size: 19px; }
+      .item .s { font-size: 12.5px; }
+      .pills { grid-template-columns: 1fr; gap: 12px; }
+      .pill { font-size: 17px; min-height: 54px; }
+      .pill svg { width: 24px; height: 24px; }
+    }
+    @media (max-width: 380px) {
+      .biz-link { display: none; }  /* 極小画面ではヘッダーに入らないため非表示 */
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -326,65 +271,76 @@
   </style>
 </head>
 <body>
-  <div class="bg-slideshow" id="bgSlideshow"></div>
 
-  <!-- 法人のお客様への入口。個人のお客様の導線は下のタイルのまま -->
-  <a class="biz-bar" href="business/index.html">
-    <span data-ja="🏢 法人のお客様（飲食店・小売店さま）はこちら" data-en="🏢 For Business (restaurants &amp; retailers)">🏢 法人のお客様（飲食店・小売店さま）はこちら</span>
-    <span class="biz-arrow">→</span>
-  </a>
-
-  <div class="top-row">
-    <div class="lang-toggle" role="group" aria-label="Language">
-      <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="logo.jpg" alt="">
+        <span class="brand-name">SAKANAYA JAPON</span>
+      </a>
+      <div class="header-right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="biz-link" href="business/index.html"
+           data-ja="法人のお客様（飲食店・小売店）" data-en="For Business (restaurants &amp; retailers)">法人のお客様（飲食店・小売店）</a>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="main">
-    <div class="logo-container">
-      <img src="logo.jpg" alt="SAKANAYA JAPON">
+  <main class="hero">
+    <div class="bg-slideshow" id="bgSlideshow"></div>
+
+    <div class="hero-inner">
+      <h1 class="site-title">SAKANAYA JAPON</h1>
+
+      <p class="tagline" data-lang="ja">海のある日常を、カンボジアの食卓に。<small>日本の鮮度管理で、刺身・鮮魚・お惣菜をご家庭へ</small></p>
+      <p class="tagline" data-lang="en">A Taste of the Sea, For Every Cambodian Home<small>Fresh seafood from Japan, in Phnom Penh</small></p>
+
+      <nav class="menu">
+        <a class="item" href="menu.html">
+          <span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span>
+          <span>
+            <span class="t" data-ja="メニュー" data-en="Menu">メニュー</span>
+            <span class="s" data-ja="本日の鮮魚・おまかせセット" data-en="Today's seafood &amp; sets">本日の鮮魚・おまかせセット</span>
+          </span>
+        </a>
+        <a class="item" href="howto.html">
+          <span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+          <span>
+            <span class="t" data-ja="ご注文方法" data-en="How to Order">ご注文方法</span>
+            <span class="s" data-ja="LINE でのご注文（動画ガイド）" data-en="Via LINE (video guide)">LINE でのご注文（動画ガイド）</span>
+          </span>
+        </a>
+        <a class="item" href="q&amp;a.html">
+          <span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg></span>
+          <span>
+            <span class="t" data-ja="よくあるご質問" data-en="FAQ">よくあるご質問</span>
+            <span class="s" data-ja="配送・お支払いなど" data-en="Delivery, payment &amp; more">配送・お支払いなど</span>
+          </span>
+        </a>
+        <a class="item" href="aboutus.html">
+          <span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+          <span>
+            <span class="t" data-ja="店舗について" data-en="About Us">店舗について</span>
+            <span class="s" data-ja="私たちの想い・店舗情報" data-en="Our story &amp; shop info">私たちの想い・店舗情報</span>
+          </span>
+        </a>
+      </nav>
+
+      <div class="pills">
+        <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="pill telegram" data-info-href="order.telegramHome">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          <span data-ja="Telegram でチャット" data-en="Chat with us directly.">Telegram でチャット</span>
+        </a>
+        <a href="https://www.facebook.com/fishstorejapan" class="pill facebook-like" data-info-href="social.facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+          <span data-ja="Facebook でいいね！" data-en="Please like our page.">Facebook でいいね！</span>
+        </a>
+      </div>
     </div>
-
-    <h1 class="site-title">SAKANAYA JAPON</h1>
-
-    <p class="tagline" data-lang="ja">海のある日常を、カンボジアの食卓に。<small>A Taste of the Sea, For Every Cambodian Home</small></p>
-    <p class="tagline" data-lang="en">A Taste of the Sea, For Every Cambodian Home<small>Fresh seafood from Japan, in Phnom Penh</small></p>
-
-    <nav>
-      <a href="menu.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
-        <span class="t" data-ja="メニュー" data-en="Menu">メニュー</span>
-        <span class="s" data-ja="MENU" data-en="Today's seafood &amp; sets">MENU</span>
-      </a>
-      <a href="howto.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-        <span class="t" data-ja="ご注文方法" data-en="How to order">ご注文方法</span>
-        <span class="s" data-ja="LINE でのご注文（動画）" data-en="Via LINE (video guide)">LINE でのご注文（動画）</span>
-      </a>
-      <a href="q&amp;a.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-        <span class="t" data-ja="よくあるご質問" data-en="FAQ">よくあるご質問</span>
-        <span class="s" data-ja="Q&amp;A" data-en="Delivery, payment &amp; more">Q&amp;A</span>
-      </a>
-      <a href="aboutus.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
-        <span class="t" data-ja="店舗について" data-en="About us">店舗について</span>
-        <span class="s" data-ja="ABOUT US" data-en="Our story &amp; shop info">ABOUT US</span>
-      </a>
-    </nav>
-
-    <div class="pills">
-      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="pill telegram" data-info-href="order.telegramHome">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></span>
-        <span data-ja="Telegram でチャット" data-en="Chat with us directly">Telegram でチャット</span>
-      </a>
-      <a href="https://www.facebook.com/fishstorejapan" class="pill facebook-like" data-info-href="social.facebook">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></span>
-        <span data-ja="Facebook でいいね！" data-en="Please like our page">Facebook でいいね！</span>
-      </a>
-    </div>
-  </div>
+  </main>
 
   <script>
     // ▼ 背景に表示する写真のファイル名（横長・高解像度推奨）。ここに足すだけで枚数を増やせます。
