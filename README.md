@@ -13,7 +13,7 @@
 
 | ファイル | 役割 |
 |---|---|
-| `index.html` | トップ（従来どおりの個人向けリンク集）。最上部に法人向けの入口バーを追加 |
+| `index.html` | トップ。写真全面のヒーローに、ロゴ・店名・4項目のメニュー・Telegram/Facebook ボタン |
 | `business/index.html` | 法人向け入口（商品カタログ・取引の流れ・問い合わせ） |
 | `assets/css/` | `common.css`（共通）/ `business.css`（法人ページ） |
 | `assets/js/` | `site-info.js`（営業時間・窓口の情報源）/ `common.js`（日英切替） |
@@ -100,21 +100,38 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 
 個人向け / 法人向けの2導線を持つトップページを追加しました。
 
-**トップページは従来の個人向けリンク集のまま残しました。** 個人 / 法人を選ばせる中間ページは置かず、
-最上部に細い法人向けバーを1本追加するだけにしています。
-これまでトップをブックマークしていた個人のお客様の導線を変えないための判断です。
+**トップページのデザイン（2026-09-14 確定）**
+
+```
+┌──────────────────────────────────────────────┐
+│ [ロゴ] SAKANAYA JAPON     日本語|EN  法人のお客様 │ ← 白いヘッダー
+├──────────────────────────────────────────────┤
+│              （魚の写真を全面に・暗め）            │
+│                   [ロゴ]                       │
+│               SAKANAYA JAPON                   │
+│         海のある日常を、カンボジアの食卓に。        │
+│                                                │
+│     (⌂) メニュー          (▤) ご注文方法          │
+│     (?) よくあるご質問     (i) 店舗について        │
+│                                                │
+│  [✈ Telegram でチャット] [👍 Facebook でいいね！]  │
+└──────────────────────────────────────────────┘
+```
 
 | ファイル | 内容 |
 |---|---|
-| `index.html` | 従来のリンク集そのまま + 最上部に法人向け入口バー（`.biz-bar`） |
+| `index.html` | 上記のトップ。CSS はインライン。写真は `fish-photo.jpg` を CSS で直接敷き、2枚目以降を JS でフェード |
 | `business/index.html` | 法人向け入口。カタログ導線・加工/配送/解体ショー・注文の流れ・問い合わせ |
-| `assets/css/common.css` | トークン、ヘッダー、フッター、ボタン、言語切替 |
-| `assets/css/business.css` | 法人ページ専用（カタログCTA、サービス、取引の流れ） |
-| `assets/js/site-info.js` | 営業時間・窓口URLの単一情報源 |
-| `assets/js/common.js` | 日英切替、`site-info.js` の値の流し込み |
+| `assets/css/common.css` | 法人ページ用の共通トークン・ヘッダー・フッター・ボタン |
+| `assets/css/business.css` | 法人ページ専用 |
+| `assets/js/site-info.js` | 営業時間・窓口URLの単一情報源（トップ・法人ページ共通） |
+| `assets/js/common.js` | 日英切替、`site-info.js` の値の流し込み（トップ・法人ページ共通） |
 
-トップページは既存の作り（インラインCSS・背景スライドショー）をそのまま活かしており、
-`assets/` の共通CSS/JSは読み込んでいません。Phase 2 で他の既存ページと一緒に移行します。
+トップの調整箇所（`index.html` の `<style>` 内）:
+
+- 写真の暗さ: `.hero::before` の `linear-gradient(... 0.55 / 0.45 / 0.72 ...)`。数値を上げるほど暗い
+- 写真の差し替え: `fish-photo.jpg` を置き換える。`sashimi.jpg` / `event.jpg` を追加すると6秒ごとに切り替わる
+- 文言: 各要素の `data-ja` / `data-en` 属性
 
 **当初計画からの変更点:** `business/index.html` に業務用商品一覧を新規実装する予定でしたが、
 同等以上のものが `sakanaya-japon/sakanaya-productlist` として**既に本番稼働中**です
@@ -124,20 +141,23 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 
 既存ページ（`menu.html` / `howto.html` / `q&a.html` / `aboutus.html`）は変更していません。
 これらの「TOP」リンクは従来どおりトップページに着地します。
+旧トップ（磨りガラスのリンク集）は廃止しました。
 
 #### 実装上の決めごと
 
 - **日英切替**: `data-ja` / `data-en` 属性でテキストを差し替え、リンクを含むブロックは
   `data-lang="ja"` / `data-lang="en"` で出し分ける。選択は `localStorage` に保存（例外は握りつぶす）
 - **JS が動かない場合**: HTML に日本語の既定値を書いてあるため、そのまま日本語で表示される。
-  CSS も `display: block` で指定しており、`display: revert` 非対応ブラウザでも本文が消えない
+  トップの背景写真も CSS で直接指定しているので JS なしで表示される。
+  CSS は `display: block` で指定しており、`display: revert` 非対応ブラウザでも本文が消えない
+- **アイコンは自前の SVG**。外部の Font Awesome に依存しない
 - **窓口URLの直書き禁止**: 新規ページでは `data-info-href="order.xxx"` を使い、
   実体は `assets/js/site-info.js` にだけ書く
 
 #### 動作確認済みの項目
 
 - `index.html` / `business/index.html` の HTML タグ構造
-- 内部リンク28件がすべて実在
+- 内部リンクがすべて実在
 - `data-info` 12件がすべて `SITE_INFO` に定義済み
 - `common.js` / `site-info.js` の構文
 - ローカル配信で全アセットが 200 を返すこと
