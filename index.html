@@ -121,7 +121,14 @@
       padding: 40px 16px 44px;
       overflow: hidden;
     }
-    .bg-slideshow { position: absolute; inset: 0; z-index: 0; }
+    /* 1枚目の写真は CSS で直接敷く（JS が動かなくても写真が出る）。
+       スライドショーの JS は、この上に2枚目以降を重ねてフェードさせるだけ */
+    .bg-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #0a1a2b url('fish-photo.jpg') center / cover no-repeat;
+    }
     .bg-slide {
       position: absolute;
       inset: 0;
