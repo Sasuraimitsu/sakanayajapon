@@ -144,12 +144,23 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.30) 45%, rgba(0, 0, 0, 0.60) 100%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.72) 100%);
     }
     .hero-inner { position: relative; z-index: 2; }   /* 文字だけを写真とグラデーションの前面に */
 
     .hero-inner { width: 100%; max-width: 900px; text-align: center; }
 
+    .hero-logo {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      background: #fff;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+      margin: 0 auto 16px;
+      display: block;
+    }
     .site-title {
       font-size: 46px;
       font-weight: 800;
@@ -255,6 +266,7 @@
       .biz-link { font-size: 12px; padding: 6px 9px; }
       .lang-toggle button { padding: 5px 10px; font-size: 12px; }
       .hero { padding: 28px 16px 36px; }
+      .hero-logo { width: 92px; height: 92px; margin-bottom: 12px; }
       .site-title { font-size: 34px; }
       .tagline { font-size: 18px; margin-bottom: 28px; }
       .tagline small { font-size: 14.5px; }
@@ -300,6 +312,7 @@
     <div class="bg-slideshow" id="bgSlideshow"></div>
 
     <div class="hero-inner">
+      <img class="hero-logo" src="logo.jpg" alt="">
       <h1 class="site-title">SAKANAYA JAPON</h1>
 
       <p class="tagline" data-lang="ja">海のある日常を、カンボジアの食卓に。<small>日本の鮮度管理で、刺身・鮮魚・お惣菜をご家庭へ</small></p>
