@@ -13,10 +13,9 @@
 
 | ファイル | 役割 |
 |---|---|
-| `index.html` | **新トップ**。個人 / 法人の2導線を選ぶページ |
-| `retail/index.html` | 個人向け入口（旧トップのリンク集。既存4ページへ誘導） |
+| `index.html` | トップ（従来どおりの個人向けリンク集）。最上部に法人向けの入口バーを追加 |
 | `business/index.html` | 法人向け入口（商品カタログ・取引の流れ・問い合わせ） |
-| `assets/css/` | `common.css`（共通）/ `home.css`（トップ）/ `business.css`（法人） |
+| `assets/css/` | `common.css`（共通）/ `business.css`（法人ページ） |
 | `assets/js/` | `site-info.js`（営業時間・窓口の情報源）/ `common.js`（日英切替） |
 | `menu.html` | メニュー画像1枚 + 注文ボタン |
 | `howto.html` | LINE での注文方法（動画 `howtouse.mp4`） |
@@ -101,16 +100,21 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 
 個人向け / 法人向けの2導線を持つトップページを追加しました。
 
+**トップページは従来の個人向けリンク集のまま残しました。** 個人 / 法人を選ばせる中間ページは置かず、
+最上部に細い法人向けバーを1本追加するだけにしています。
+これまでトップをブックマークしていた個人のお客様の導線を変えないための判断です。
+
 | ファイル | 内容 |
 |---|---|
-| `index.html` | 個人 / 法人を選ぶ新トップ。旧トップのリンク集は `retail/` へ移動 |
-| `retail/index.html` | 旧トップをそのまま移設（磨りガラス調のリンク集）。既存4ページへ誘導 |
+| `index.html` | 従来のリンク集そのまま + 最上部に法人向け入口バー（`.biz-bar`） |
 | `business/index.html` | 法人向け入口。カタログ導線・加工/配送/解体ショー・注文の流れ・問い合わせ |
 | `assets/css/common.css` | トークン、ヘッダー、フッター、ボタン、言語切替 |
-| `assets/css/home.css` | 新トップ専用（ヒーロー、選択カード） |
 | `assets/css/business.css` | 法人ページ専用（カタログCTA、サービス、取引の流れ） |
 | `assets/js/site-info.js` | 営業時間・窓口URLの単一情報源 |
 | `assets/js/common.js` | 日英切替、`site-info.js` の値の流し込み |
+
+トップページは既存の作り（インラインCSS・背景スライドショー）をそのまま活かしており、
+`assets/` の共通CSS/JSは読み込んでいません。Phase 2 で他の既存ページと一緒に移行します。
 
 **当初計画からの変更点:** `business/index.html` に業務用商品一覧を新規実装する予定でしたが、
 同等以上のものが `sakanaya-japon/sakanaya-productlist` として**既に本番稼働中**です
@@ -118,8 +122,8 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 作り直すと価格マスターが二重管理になるため、**法人向けページからはカタログへリンクする方針に変更**しました。
 根拠は `docs/github-inventory.md` の §2 を参照してください。
 
-既存ページ（`menu.html` / `howto.html` / `q&a.html` / `aboutus.html`）は削除していません。
-これらの「TOP」リンクは新トップ（選択ページ）に着地します。
+既存ページ（`menu.html` / `howto.html` / `q&a.html` / `aboutus.html`）は変更していません。
+これらの「TOP」リンクは従来どおりトップページに着地します。
 
 #### 実装上の決めごと
 
@@ -132,15 +136,15 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 
 #### 動作確認済みの項目
 
-- 新規3ページの HTML タグ構造
-- 内部リンク45件がすべて実在（CSS の背景画像参照を含む）
+- `index.html` / `business/index.html` の HTML タグ構造
+- 内部リンク28件がすべて実在
 - `data-info` 12件がすべて `SITE_INFO` に定義済み
 - `common.js` / `site-info.js` の構文
 - ローカル配信で全アセットが 200 を返すこと
 
 ### Phase 2
 
-- 既存4ページの CSS / ナビゲーションを共通化（`assets/css/common.css` へ寄せる）
+- トップと既存4ページの CSS / ナビゲーションを共通化（`assets/css/common.css` へ寄せる）
 - 既存4ページにも `site-info.js` を適用し、営業時間・窓口URLの直書きをなくす
 - `q&a.html` → `faq.html` への改名（旧URLからの案内を用意）
 - 画像を `assets/images/` へ整理
