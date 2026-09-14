@@ -21,7 +21,7 @@ SAKANAYA 系を Organization へ寄せるまでの手順をまとめたもの。
 | 1 | `sakanaya-japon/sakanaya-productlist` | **法人向け商品カタログ（現行本番）** | 2026-09-11 | 維持（正） |
 | 2 | `Sasuraimitsu/sakanaya-productlist` | 旧カタログURL → 移転案内ページ | 2026-09-03 | 案内期間終了後に Archive |
 | 3 | `Sasuraimitsu/sakanayajapon` | 個人向けサイト（本リポジトリ） | 2026-06-15 | **Org へ移管** |
-| 4 | `Sasuraimitsu/sakanayajapon-air` | カタログの旧試作版 | 2026-03-15 | **Archive**（§2参照） |
+| 4 | `Sasuraimitsu/sakanayajapon-air` | カタログの旧試作版 | 2026-09-14 | 価格削除済 → **Archive待ち**（§2参照） |
 | 5 | `Sasuraimitsu/sakanaya-punch` | 勤怠管理システム | 2026-06-30 | **Org へ移管 + 公開範囲要確認** |
 | 6 | `Sasuraimitsu/metis-order-web` | METIS 受注サイト | 2026-07-12 | 維持（要 description） |
 | 7 | `Sasuraimitsu/metis-photos` | METIS 商品写真の公開ミラー | 2026-08-01 | 維持 |
@@ -58,7 +58,7 @@ SAKANAYA 系を Organization へ寄せるまでの手順をまとめたもの。
 | 項目 | `Sasuraimitsu/sakanayajapon-air` | `sakanaya-japon/sakanaya-productlist` |
 |---|---|---|
 | 最終更新 | 2026-03-15（半年停止） | 2026-09-11（現役） |
-| 商品データ | **公開JSに40件ハードコード**（`$62.93` 等の実価格入り） | GAS から動的取得 |
+| 商品データ | ~~公開JSに32件ハードコード~~ → **2026-09-14 に価格を削除済み** | GAS から動的取得 |
 | GAS 接続先 | `AKfycbxR97eDr6u...`（旧） | `AKfycbwgE8fOWPy...`（2026-07-06 新ブック移行済み） |
 | 注文送信 | Telegram のテキスト本文に流し込むだけ | GAS `send_order` + Cloud Run Bot、冪等キー付き |
 | 顧客登録 | なし | `register_user`（店名・担当者・電話） |
@@ -81,11 +81,13 @@ GAS の新ブック・Cloud Run Bot・顧客登録まで繋がっています。
 
 ### `sakanayajapon-air` の後始末
 
-Archive するだけでは**公開状態は続き、40件の価格は誰でも読めたまま**です。順番に注意してください。
+Archive するだけでは**公開状態は続き、価格は誰でも読めたまま**です。順番に注意してください。
 
-1. 価格を含む `script.js` の `SAMPLE_PRODUCTS` を削除（または private 化）
-2. そのうえで Archive（読み取り専用化）
-3. README に「後継: sakanaya-japon/sakanaya-productlist」と1行記載
+1. ✅ **完了（2026-09-14）**: `script.js` の `SAMPLE_PRODUCTS` から価格32件を削除（すべて `price: null`）。
+   既存の `hasPrice` 分岐により「価格はお問い合わせください」＋Telegram問い合わせボタン表示に切り替わる。
+   併せて `index.html` のお知らせを新カタログへの導線に差し替え、README に後継を明記
+2. ⬜ **未実施**: Archive（読み取り専用化）
+   → `python3 docs/apply-repo-metadata.py --apply --archive` で実行できます
 
 過去のコミット履歴にも価格は残るため、**完全に消したい場合はリポジトリ削除**が確実です。
 （履歴の書き換えより、削除のほうが事故が少ない）
