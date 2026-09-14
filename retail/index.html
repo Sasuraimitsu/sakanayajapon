@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>個人のお客様｜SAKANAYA JAPON</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="../logo.jpg">
+  <meta name="description" content="カンボジア・プノンペンの魚屋 SAKANAYA JAPON。日本の鮮度管理で、刺身・鮮魚・お惣菜をご家庭へ。LINE・Telegram・Facebook Messenger で注文できます。">
+  <!-- OGP（FacebookやLINE等でシェアした際のプレビュー用） -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SAKANAYA JAPON｜海のある日常を、カンボジアの食卓に。">
+  <meta property="og:description" content="プノンペンの魚屋。日本の鮮度管理で刺身・鮮魚・お惣菜をお届け。LINE・Telegram・Facebook Messenger で注文OK。">
+  <meta property="og:image" content="https://sasuraimitsu.github.io/sakanayajapon/logo.jpg">
+  <meta property="og:url" content="https://sasuraimitsu.github.io/sakanayajapon/">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    /* 1. 背景の設定（氷の上の魚） */
+    body { 
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* 中央に配置 */
+      background: #0a1a2b; /* 画像読込前のフォールバック色 */
+    }
+
+    /* 背景スライドショー（複数写真をフェードで切り替え） */
+    .bg-slideshow { position: fixed; inset: 0; z-index: -2; }
+    .bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .bg-slide.active { opacity: 1; }
+
+    /* 2. 全体を少し暗くして写真を引き締めるオーバーレイ */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.3); /* 30%だけ暗くする（鮮度感を殺さない程度） */
+      z-index: -1;
+    }
+
+    /* 3. ロゴとメニューを包む「磨りガラス」の箱 */
+    .main-card {
+      width: 90%;
+      max-width: 400px;
+      padding: 40px 20px;
+      /* 磨りガラス効果 */
+      background: rgba(255, 255, 255, 0.8); 
+      backdrop-filter: blur(10px); 
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    /* 4. ロゴの影を調整（お魚の青に合わせた影） */
+    .logo-container img {
+      width: 140px;
+      filter: drop-shadow(0 5px 15px rgba(0, 123, 255, 0.2));
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      color: #333;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      letter-spacing: 0.05em;
+    }
+
+    /* 5. リンクボタンの調整 */
+    nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      padding: 15px;
+      background: #ffffff;
+      color: #0056b3; /* 濃いめの青 */
+      text-decoration: none;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    nav a:hover {
+      background: #007BFF;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* アイコンの色 */
+    nav a i:first-child {
+      position: absolute;
+      left: 20px;
+    }
+
+    /* Telegramボタン */
+    nav a.telegram {
+      background: #0088cc;
+      color: white;
+    }
+
+    /* トップへ戻る導線 */
+    .back-top { margin: 22px 0 0; font-size: 12.5px; }
+    .back-top a { color: #0056b3; text-decoration: none; font-weight: bold; }
+    .back-top a:hover { text-decoration: underline; }
+
+    /* Facebookボタン */
+    nav a.facebook-like {
+      background: #1877f2;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-slideshow" id="bgSlideshow"></div>
+
+  <div class="main-card">
+    <div class="logo-container">
+      <img src="../logo.jpg" alt="Sakanaya Japon">
+    </div>
+
+    <div class="tagline">A Taste of the Sea, For Every Cambodian Home<br>海のある日常を、カンボジアの食卓に。</div>
+
+    <nav>
+      <a href="../menu.html"><i class="fa-solid fa-utensils"></i> MENU</a>
+      <a href="../howto.html"><i class="fa-solid fa-circle-play"></i> HOW TO ORDER FOR LINE USER</a>
+      <a href="../q&amp;a.html"><i class="fa-solid fa-circle-question"></i> Q&amp;A</a>
+      <a href="../aboutus.html"><i class="fa-solid fa-house-chimney"></i> ABOUT US</a>
+      <a href="https://t.me/+UZAm7-eLzD0yZTA1" class="telegram" target="_blank"><i class="fa-brands fa-telegram"></i> Order by Telegram</a>
+
+      <a href="https://www.facebook.com/fishstorejapan" class="facebook-like" target="_blank" rel="noopener noreferrer">
+        Please like on Facebook <i class="fa-solid fa-thumbs-up thumb"></i>
+      </a>
+    </nav>
+
+    <p class="back-top"><a href="../index.html">← 法人のお客様はこちら / For Business</a></p>
+  </div>
+
+  <script>
+    // ▼ 背景に表示する写真のファイル名（横長・高解像度推奨）。ここに足すだけで枚数を増やせます。
+    const bgImages = [
+      '../fish-photo.jpg',  // ① 魚（鮮魚）
+      '../sashimi.jpg',     // ② 刺身の盛り合わせ
+      '../event.jpg'        // ③ イベントの様子（解体ショーなど）
+    ];
+
+    const container = document.getElementById('bgSlideshow');
+    const slides = [];
+    let idx = 0, timer = null;
+
+    function startRotation() {
+      if (slides.length > 1 && !timer) {
+        timer = setInterval(() => {
+          slides[idx].classList.remove('active');
+          idx = (idx + 1) % slides.length;
+          slides[idx].classList.add('active');
+        }, 6000); // 6秒ごとに切り替え
+      }
+    }
+
+    // 読み込めた画像だけを順に背景へ追加（存在しないファイルは自動でスキップ）
+    bgImages.forEach(src => {
+      const probe = new Image();
+      probe.onload = () => {
+        const d = document.createElement('div');
+        d.className = 'bg-slide';
+        d.style.backgroundImage = `url('${src}')`;
+        container.appendChild(d);
+        slides.push(d);
+        if (slides.length === 1) d.classList.add('active'); // 最初の1枚はすぐ表示
+        startRotation();
+      };
+      probe.src = src;
+    });
+  </script>
+</body>
+</html>

@@ -13,7 +13,11 @@
 
 | ファイル | 役割 |
 |---|---|
-| `index.html` | トップ（リンク集型）。各ページと注文窓口への入口 |
+| `index.html` | **新トップ**。個人 / 法人の2導線を選ぶページ |
+| `retail/index.html` | 個人向け入口（旧トップのリンク集。既存4ページへ誘導） |
+| `business/index.html` | 法人向け入口（商品カタログ・取引の流れ・問い合わせ） |
+| `assets/css/` | `common.css`（共通）/ `home.css`（トップ）/ `business.css`（法人） |
+| `assets/js/` | `site-info.js`（営業時間・窓口の情報源）/ `common.js`（日英切替） |
 | `menu.html` | メニュー画像1枚 + 注文ボタン |
 | `howto.html` | LINE での注文方法（動画 `howtouse.mp4`） |
 | `q&a.html` | よくあるご質問 |
@@ -93,27 +97,51 @@ PR を作っても GitHub Pages にはプレビューが出ません。確認方
 | `docs/punch-migration.md` | `sakanaya-punch` の Organization 移管手順（先行実施） |
 | `docs/apply-repo-metadata.py` | 全リポジトリの description / topics を一括設定するスクリプト |
 
-### Phase 1（未着手）
+### Phase 1（✅ 完了 / 2026-09-14）
 
-個人向け / 法人向けの2導線を持つトップページを追加します。
+個人向け / 法人向けの2導線を持つトップページを追加しました。
 
-- `index.html`：個人 / 法人を選ぶ新トップ
-- `retail/index.html`：個人向け入口（既存ページをそのまま利用）
-- `business/index.html`：法人向け入口
-- `assets/css/`, `assets/js/`：共通スタイル・日英切替
+| ファイル | 内容 |
+|---|---|
+| `index.html` | 個人 / 法人を選ぶ新トップ。旧トップのリンク集は `retail/` へ移動 |
+| `retail/index.html` | 旧トップをそのまま移設（磨りガラス調のリンク集）。既存4ページへ誘導 |
+| `business/index.html` | 法人向け入口。カタログ導線・加工/配送/解体ショー・注文の流れ・問い合わせ |
+| `assets/css/common.css` | トークン、ヘッダー、フッター、ボタン、言語切替 |
+| `assets/css/home.css` | 新トップ専用（ヒーロー、選択カード） |
+| `assets/css/business.css` | 法人ページ専用（カタログCTA、サービス、取引の流れ） |
+| `assets/js/site-info.js` | 営業時間・窓口URLの単一情報源 |
+| `assets/js/common.js` | 日英切替、`site-info.js` の値の流し込み |
 
 **当初計画からの変更点:** `business/index.html` に業務用商品一覧を新規実装する予定でしたが、
 同等以上のものが `sakanaya-japon/sakanaya-productlist` として**既に本番稼働中**です
 （GAS 連携・顧客登録・在庫表示・Excel出力・商品画像167枚）。
-作り直すと価格マスターが二重管理になるため、**法人向けページからはカタログへリンクする方針に変更**します。
+作り直すと価格マスターが二重管理になるため、**法人向けページからはカタログへリンクする方針に変更**しました。
 根拠は `docs/github-inventory.md` の §2 を参照してください。
 
-既存ページは Phase 1 では削除しません。公開中ページの安全性を優先します。
+既存ページ（`menu.html` / `howto.html` / `q&a.html` / `aboutus.html`）は削除していません。
+これらの「TOP」リンクは新トップ（選択ページ）に着地します。
+
+#### 実装上の決めごと
+
+- **日英切替**: `data-ja` / `data-en` 属性でテキストを差し替え、リンクを含むブロックは
+  `data-lang="ja"` / `data-lang="en"` で出し分ける。選択は `localStorage` に保存（例外は握りつぶす）
+- **JS が動かない場合**: HTML に日本語の既定値を書いてあるため、そのまま日本語で表示される。
+  CSS も `display: block` で指定しており、`display: revert` 非対応ブラウザでも本文が消えない
+- **窓口URLの直書き禁止**: 新規ページでは `data-info-href="order.xxx"` を使い、
+  実体は `assets/js/site-info.js` にだけ書く
+
+#### 動作確認済みの項目
+
+- 新規3ページの HTML タグ構造
+- 内部リンク45件がすべて実在（CSS の背景画像参照を含む）
+- `data-info` 12件がすべて `SITE_INFO` に定義済み
+- `common.js` / `site-info.js` の構文
+- ローカル配信で全アセットが 200 を返すこと
 
 ### Phase 2
 
-- 既存4ページの CSS / ナビゲーションを共通化
-- `assets/js/site-info.js` による営業時間・窓口URLの単一情報源化（`docs/contact-points.md` §3）
+- 既存4ページの CSS / ナビゲーションを共通化（`assets/css/common.css` へ寄せる）
+- 既存4ページにも `site-info.js` を適用し、営業時間・窓口URLの直書きをなくす
 - `q&a.html` → `faq.html` への改名（旧URLからの案内を用意）
 - 画像を `assets/images/` へ整理
 - 法人向け「加工」「配送」「新規取引」の詳細ページ追加
