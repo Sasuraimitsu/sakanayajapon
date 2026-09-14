@@ -2,8 +2,8 @@
 
 カンボジア・プノンペンの魚屋 SAKANAYA JAPON の、個人のお客様向けサイトです。
 
-- 公開URL: https://sasuraimitsu.github.io/sakanayajapon/
-  （`sakanaya-japon` Organization への移管後は `https://sakanaya-japon.github.io/sakanayajapon/`）
+- 公開URL: https://sakanaya-japon.github.io/sakanayajapon/
+  （`sakanaya-japon` Organization へ移管済み。旧URL `sasuraimitsu.github.io/sakanayajapon/` は配信されません）
 - ホスティング: GitHub Pages（`main` ブランチ / ルート直下）
 - 法人向け商品カタログは別リポジトリ: https://github.com/sakanaya-japon/sakanaya-productlist
 

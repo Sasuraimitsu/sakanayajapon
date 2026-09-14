@@ -131,13 +131,20 @@ Archive するだけでは**公開状態は続き、価格は誰でも読めた�
 | 個人向けサイト | `sasuraimitsu.github.io/sakanayajapon/` | `sakanaya-japon.github.io/sakanayajapon/` |
 | 勤怠管理 | `sasuraimitsu.github.io/sakanaya-punch/` | `sakanaya-japon.github.io/sakanaya-punch/` |
 
-`index.html` の OGP に旧URLが直書きされているので、移管と同時に差し替えが必要です。
+`index.html` / `business/index.html` の OGP に旧URLが直書きされていましたが、
+**2026-09-14 の移管に合わせて差し替え済み**です。
 
 ```html
-<!-- 移管後に修正が必要な箇所（index.html） -->
-<meta property="og:image" content="https://sasuraimitsu.github.io/sakanayajapon/logo.jpg">
-<meta property="og:url"   content="https://sasuraimitsu.github.io/sakanayajapon/">
+<!-- 差し替え済み（index.html） -->
+<meta property="og:image" content="https://sakanaya-japon.github.io/sakanayajapon/fish-photo.jpg">
+<meta property="og:url"   content="https://sakanaya-japon.github.io/sakanayajapon/">
+
+<!-- 差し替え済み（business/index.html） -->
+<meta property="og:image" content="https://sakanaya-japon.github.io/sakanayajapon/logo.jpg">
+<meta property="og:url"   content="https://sakanaya-japon.github.io/sakanayajapon/business/">
 ```
+
+README の公開URL表記も同時に新URLへ更新しました。
 
 ### 移管前に決めておくこと
 
