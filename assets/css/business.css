@@ -1,0 +1,152 @@
+/* ==========================================================================
+   business.css — 法人向けページ専用
+   商品一覧はこのページに持たせない。価格は sakanaya-japon/sakanaya-productlist
+   （GAS 連携の本番カタログ）側で管理する。詳細は docs/github-inventory.md §2。
+   ========================================================================== */
+
+.biz-hero {
+  background: linear-gradient(135deg, #0a1a2b 0%, var(--business) 100%);
+  color: #fff;
+  padding: 44px 16px 40px;
+}
+
+.biz-hero-inner { max-width: var(--maxw); margin: 0 auto; }
+
+.biz-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: #8fc4e8;
+  margin: 0 0 8px;
+}
+
+.biz-title { font-size: 25px; font-weight: 700; margin: 0 0 12px; line-height: 1.5; }
+
+.biz-lead { font-size: 14.5px; color: #d5e4f0; margin: 0; max-width: 40em; }
+
+/* ── カタログへの導線（このページの主役） ───────────── */
+.catalog-cta {
+  max-width: var(--maxw);
+  margin: -22px auto 0;
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.catalog-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.catalog-card h2 {
+  border: 0;
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.catalog-card p { font-size: 14px; color: var(--muted); }
+
+.catalog-btn {
+  display: block;
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 17px 20px;
+  border-radius: var(--radius);
+  margin-top: 6px;
+  transition: background 0.15s ease;
+}
+
+.catalog-btn:hover { background: var(--blue-dark); }
+.catalog-btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
+.catalog-note { font-size: 12.5px; color: var(--muted); margin: 12px 0 0; }
+
+/* ── サービス3項目 ──────────────────────────────────── */
+.biz-services {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .biz-services { grid-template-columns: repeat(3, 1fr); }
+}
+
+.svc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--business);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  box-shadow: var(--shadow);
+}
+
+.svc-icon { font-size: 26px; line-height: 1; margin-bottom: 8px; }
+.svc h3 { font-size: 16px; margin: 0 0 8px; color: var(--navy); }
+.svc p { font-size: 13.5px; color: var(--muted); margin: 0; }
+
+/* ── 取引の流れ ─────────────────────────────────────── */
+.flow {
+  counter-reset: flow;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flow li {
+  counter-increment: flow;
+  position: relative;
+  padding: 0 0 20px 46px;
+  font-size: 14px;
+}
+
+.flow li::before {
+  content: counter(flow);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--business);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 最後の項目の縦線は引かない */
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 34px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--line);
+}
+
+.flow strong { display: block; color: var(--navy); margin-bottom: 2px; }
+
+/* ── 注意書き ───────────────────────────────────────── */
+.biz-notes {
+  background: #eef4fa;
+  border: 1px solid #c9dcec;
+  border-radius: var(--radius);
+  padding: 18px;
+  font-size: 13.5px;
+}
+
+.biz-notes ul { margin: 0; padding-left: 1.2em; }
+.biz-notes li { margin-bottom: 7px; }
+.biz-notes li:last-child { margin-bottom: 0; }
